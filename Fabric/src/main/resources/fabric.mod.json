@@ -52,6 +52,9 @@
         "fabric",
         "quilt"
       ],
+      "java": [
+        "${java_version}"
+      ],
       "dependencies": [
         "fabric-api(required){modrinth:P7dR8mSH}{curseforge:306612}",
         "commonnetworking(required){modrinth:HIuqnQpi}{curseforge:806044}",

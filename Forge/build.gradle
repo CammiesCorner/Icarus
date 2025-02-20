@@ -35,7 +35,8 @@ dependencies {
     modImplementation forge.caelus
 
     modCompileOnly libs.figura.forge
-//    modLocalRuntime libs.figura.forge
+    modLocalRuntime libs.figura.forge
+    modLocalRuntime libs.bundles.figura.runtime
 
     modCompileOnly variantOf(libs.emi.forge) { classifier 'api' }
     modLocalRuntime libs.emi.forge

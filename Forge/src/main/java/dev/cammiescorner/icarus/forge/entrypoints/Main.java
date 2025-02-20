@@ -1,10 +1,10 @@
-package dev.cammiescorner.icarus.neoforge.entrypoints;
+package dev.cammiescorner.icarus.forge.entrypoints;
 
 import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.init.IcarusItems;
 import dev.cammiescorner.icarus.init.IcarusStatusEffects;
 import dev.cammiescorner.icarus.item.WingItem;
-import dev.cammiescorner.icarus.neoforge.registry.IcarusDeferredRegister;
+import dev.cammiescorner.icarus.forge.registry.IcarusDeferredRegister;
 import dev.cammiescorner.icarus.util.IcarusHelper;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTab;

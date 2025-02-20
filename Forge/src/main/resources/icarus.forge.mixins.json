@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "dev.cammiescorner.icarus.neoforge.mixin",
+  "package": "dev.cammiescorner.icarus.forge.mixin",
   "plugin": "dev.cammiescorner.icarus.IcarusMixinPlugin",
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_17",

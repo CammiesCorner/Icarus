@@ -1,4 +1,4 @@
-package dev.cammiescorner.icarus.neoforge.entrypoints;
+package dev.cammiescorner.icarus.forge.entrypoints;
 
 import com.teamresourceful.resourcefulconfig.client.ConfigScreen;
 import dev.cammiescorner.icarus.Icarus;

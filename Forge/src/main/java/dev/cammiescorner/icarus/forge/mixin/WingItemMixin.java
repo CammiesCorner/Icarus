@@ -1,4 +1,4 @@
-package dev.cammiescorner.icarus.neoforge.mixin;
+package dev.cammiescorner.icarus.forge.mixin;
 
 import dev.cammiescorner.icarus.item.WingItem;
 import net.minecraft.world.item.Item;

@@ -1,4 +1,4 @@
-package dev.cammiescorner.icarus.neoforge.registry;
+package dev.cammiescorner.icarus.forge.registry;
 
 import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.util.Registrar;

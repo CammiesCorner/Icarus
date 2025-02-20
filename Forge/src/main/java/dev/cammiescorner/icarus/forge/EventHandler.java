@@ -1,4 +1,4 @@
-package dev.cammiescorner.icarus.neoforge;
+package dev.cammiescorner.icarus.forge;
 
 import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.client.IcarusClient;

@@ -2,6 +2,14 @@ plugins {
     alias libs.plugins.moddevgradle
 }
 
+// Sets up a dependency configuration called 'localRuntime' and a deobfuscating one called 'modLocalRuntime'
+// These configurations should be used instead of 'runtimeOnly' to declare
+// a dependency that will be present for runtime testing but that is
+// "optional", meaning it will not be pulled by dependents of this mod.
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+}
+
 repositories {
     maven {
         name = "TheIllusiveC4"
@@ -23,7 +31,8 @@ dependencies {
     implementation neoforge.caelus
 
     compileOnly libs.figura.neoforge
-//    runtimeOnly libs.figura.neoforge
+    localRuntime libs.figura.neoforge
+    localRuntime libs.bundles.figura.runtime
 
     compileOnly variantOf(libs.emi.neoforge) { classifier 'api' }
 }

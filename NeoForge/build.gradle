@@ -31,8 +31,8 @@ dependencies {
     implementation neoforge.caelus
 
     compileOnly libs.figura.neoforge
-    localRuntime libs.figura.neoforge
-    localRuntime libs.bundles.figura.runtime
+//    localRuntime libs.figura.neoforge
+//    localRuntime libs.bundles.figura.runtime
 
     compileOnly variantOf(libs.emi.neoforge) { classifier 'api' }
 }

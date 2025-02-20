@@ -35,8 +35,8 @@ dependencies {
     }
 
     modCompileOnly libs.figura.fabric
-    modLocalRuntime libs.figura.fabric
-    localRuntime libs.bundles.figura.runtime
+//    modLocalRuntime libs.figura.fabric
+//    localRuntime libs.bundles.figura.runtime
 
     modCompileOnly variantOf(libs.emi.fabric) { classifier 'api' }
 }

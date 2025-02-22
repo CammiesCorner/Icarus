@@ -14,7 +14,7 @@ restrictions:
  4) The Software does not make up a substantial portion of your own projects.
 
 If more than 2 years have passed without any source code change on the origin repository for the Software
-([https://github.com/Up-Mods/Icarus]([https://github.com/Up-Mods/Icarus] "Up-Mods/Icarus on Github")), then all but the first 2 restrictions are void, and may be ignored
+https://github.com/CammiesCorner/Icarus, then all but the first 2 restrictions are void, and may be ignored
 when using, copying, modifying, and/or merging copies of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT

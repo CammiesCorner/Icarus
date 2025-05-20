@@ -84,7 +84,10 @@ public class IcarusHelper {
             }
 
             if ((wings == null || !wings.is(IcarusItemTags.FREE_FLIGHT)) && entity instanceof Player player && !player.isCreative()) {
-                player.getFoodData().addExhaustion(cfg.exhaustionAmount());
+                if(player.getFoodData().getFoodLevel() < cfg.requiredFoodAmount() && player.zza > 0) {
+                    player.getFoodData().addExhaustion(cfg.exhaustionAmount());
+                }
+
                 if (player.getFoodData().getFoodLevel() < cfg.requiredFoodAmount()) {
                     stopFlying(player);
                     Component message = Component.translatable("message.icarus.status.no_fly.hunger").withStyle(ChatFormatting.BLUE);

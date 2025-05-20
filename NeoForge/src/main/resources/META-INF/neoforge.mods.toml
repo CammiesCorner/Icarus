@@ -27,7 +27,7 @@ config = "${mod_id}.neoforge.mixins.json"
     { modId = "minecraft", type = "required", versionRange = "[${minecraft_version}]", ordering = "NONE", side = "BOTH" },
     { modId = "caelus", type = "required", versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "308989", modrinth = "40FYwb4z" } },
     { modId = "commonnetworking", type = "required", versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "806044", modrinth = "HIuqnQpi" } },
-    { modId = "curios", type = "required", versionRange = "[9.0.0,)", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "1037991", modrinth = "BaqCltvf" } },
+    { modId = "curios", type = "required", versionRange = "[9.5.1,)", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "309927", modrinth = "vvuO3ImH" } },
     { modId = "resourcefulconfig", type = "required", versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "714059", modrinth = "M1953qlQ" } },
     { modId = "sparkweave", type = "required", versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "911456", modrinth = "nf68xfAw" } }
 ]

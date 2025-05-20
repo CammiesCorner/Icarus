@@ -22,8 +22,8 @@ dependencies {
     implementation libs.caelus.neoforge
 
     compileOnly libs.figura.neoforge
-    localRuntime libs.figura.neoforge
-    localRuntime libs.bundles.figura.runtime
+//    localRuntime libs.figura.neoforge
+//    localRuntime libs.bundles.figura.runtime
 
     compileOnly variantOf(libs.emi.neoforge) { classifier 'api' }
 
@@ -32,8 +32,6 @@ dependencies {
 
 test {
     useJUnitPlatform()
-
-    workingDir(project.file("run"))
 }
 
 neoForge {
@@ -52,7 +50,6 @@ neoForge {
     runs {
         configureEach {
             logLevel = org.slf4j.event.Level.DEBUG
-            // Recommended logging data for a userdev environment
             // The markers can be added/remove as needed separated by commas.
             // "SCAN": For mods scan.
             // "REGISTRIES": For firing of registry events.

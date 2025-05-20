@@ -31,6 +31,4 @@ neoForge {
 
 test {
 	useJUnitPlatform()
-
-	workingDir(project.file("run"))
 }

@@ -20,7 +20,7 @@ import dev.cammiescorner.icarus.client.IcarusClientConfig;
                         text = "Curseforge"
                 ),
                 @ConfigInfo.Link(
-                        value = "https://github.com/Up-Mods/Icarus",
+                        value = "https://github.com/CammiesCorner/Icarus",
                         icon = "github",
                         text = "Github"
                 ),

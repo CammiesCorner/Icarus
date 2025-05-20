@@ -13,22 +13,11 @@ pluginManagement {
 }
 
 plugins {
-    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.9.0'
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
 }
 
-dependencyResolutionManagement {
-    versionCatalogs {
-        libs {
-            from(files("./Common/libs.versions.toml"))
-        }
-        neoforge {
-            from(files("./NeoForge/libs.versions.toml"))
-        }
-        fabric {
-            from(files("./Fabric/libs.versions.toml"))
-        }
-    }
-}
+rootProject.name = 'Icarus'
+include 'Common', 'Fabric', 'NeoForge'
 
 def ENV = System.getenv()
 
@@ -44,7 +33,3 @@ buildCache {
         }
     }
 }
-
-rootProject.name = 'Icarus'
-
-include 'Common', 'Fabric', 'NeoForge'

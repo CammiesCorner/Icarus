@@ -2,39 +2,32 @@ plugins {
     alias libs.plugins.moddevgradle
 }
 
-// Sets up a dependency configuration called 'localRuntime' and a deobfuscating one called 'modLocalRuntime'
-// These configurations should be used instead of 'runtimeOnly' to declare
-// a dependency that will be present for runtime testing but that is
-// "optional", meaning it will not be pulled by dependents of this mod.
+// need this before dependencies because it configures the plugin and creates additionalRuntimeClasspath configuration
+neoForge.version = libs.versions.neoforge.get()
+
 configurations {
     runtimeClasspath.extendsFrom localRuntime
-}
-
-repositories {
-    maven {
-        name = "TheIllusiveC4"
-        url = "https://maven.theillusivec4.top"
-    }
 }
 
 dependencies {
     compileOnly project(":Common")
 
+    compileOnly libs.autoservice.annotations
+    annotationProcessor libs.autoservice
+
     implementation libs.sparkweave.neoforge
-
     implementation libs.resourcefulconfig.neoforge
-
     implementation libs.commonnetworking.neoforge
-
-    implementation neoforge.curios
-
-    implementation neoforge.caelus
+    implementation libs.curios.neoforge
+    implementation libs.caelus.neoforge
 
     compileOnly libs.figura.neoforge
-//    localRuntime libs.figura.neoforge
-//    localRuntime libs.bundles.figura.runtime
+    localRuntime libs.figura.neoforge
+    localRuntime libs.bundles.figura.runtime
 
     compileOnly variantOf(libs.emi.neoforge) { classifier 'api' }
+
+    testImplementation libs.neoforge.testframework
 }
 
 test {
@@ -44,29 +37,16 @@ test {
 }
 
 neoForge {
-    version = neoforge.versions.neoforge.get()
-
     parchment {
         minecraftVersion = libs.versions.parchment.minecraft.get()
         mappingsVersion = libs.versions.parchment.mappings.get()
     }
 
     mods {
-        // define mod <-> source bindings
-        // these are used to tell the game which sources are for which mod
-        // mostly optional in a single mod project
-        // but multi mod projects should define one per mod
         "${mod_id}" {
             sourceSet(project(":Common").sourceSets.main)
             sourceSet(sourceSets.main)
         }
-    }
-
-    unitTest {
-        enable()
-
-        testedMod = mods."${mod_id}"
-        loadedMods.set([mods."${mod_id}"])
     }
 
     runs {
@@ -78,10 +58,8 @@ neoForge {
             // "REGISTRIES": For firing of registry events.
             // "REGISTRYDUMP": For getting the contents of all registries.
             systemProperty 'forge.logging.markers', 'REGISTRIES'
-            systemProperty 'sparkweave.debug', 'true'
             systemProperty 'mixin.debug', 'true'
-
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            systemProperty 'sparkweave.debug', 'true'
 
             ideName = "NeoForge ${it.name.capitalize()} (${project.path})" // Unify the run config names with fabric
             gameDirectory = project.file('run')
@@ -89,31 +67,38 @@ neoForge {
             if (rootProject.hasProperty('mc_java_agent_path')) {
                 jvmArgument("-javaagent:${rootProject.mc_java_agent_path}")
             }
-
-            loadedMods.set([mods."${mod_id}"])
         }
 
         client {
             client()
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+
             if (project.hasProperty('mc_uuid')) {
-                programArguments.add("--uuid=${project.findProperty('mc_uuid')}")
+                programArgument "--uuid=${project.findProperty('mc_uuid')}"
             }
 
             if (project.hasProperty('mc_username')) {
-                programArguments.add("--username=${project.findProperty('mc_username')}")
+                programArgument "--username=${project.findProperty('mc_username')}"
             }
         }
 
         server {
             server()
-            programArguments.add('--nogui')
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+
+            programArgument '--nogui'
         }
 
         data {
             data()
-            // this must be strings ONLY, or neogradle will not generate run configs at all!
-            programArguments.addAll('--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').absolutePath, '--existing', file('src/main/resources/').absolutePath)
+            programArguments.addAll('--mod', 'sparkweave', '--mod', project.mod_id, '--all', '--flat', '--output', file('src/generated/resources').absolutePath, '--existing', file('src/main/resources').absolutePath)
         }
+    }
+
+    unitTest {
+        enable()
+
+        testedMod = mods."${mod_id}"
     }
 }
 

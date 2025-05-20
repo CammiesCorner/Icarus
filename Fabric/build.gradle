@@ -1,5 +1,5 @@
 plugins {
-    alias fabric.plugins.loom
+    alias libs.plugins.fabric.loom
 }
 
 dependencies {
@@ -9,58 +9,57 @@ dependencies {
         it.parchment("org.parchmentmc.data:parchment-${libs.versions.parchment.minecraft.get()}:${libs.versions.parchment.mappings.get()}@zip")
     })
 
-    modImplementation fabric.fabric.loader
-    modImplementation (fabric.fabric.api) {
+    modImplementation libs.fabric.loader
+    modImplementation (libs.fabric.api) {
         exclude group: "net.fabricmc", module: "fabric-loader"
     }
 
     compileOnly project(":Common")
     compileOnly libs.jetbrains.annotations
 
-    modImplementation libs.sparkweave.fabric
+    compileOnly libs.autoservice.annotations
+    annotationProcessor libs.autoservice
 
+    modImplementation libs.sparkweave.fabric
     modImplementation (libs.resourcefulconfig.fabric) {
         exclude group: "net.fabricmc", module: "fabric-loader"
     }
     modImplementation libs.commonnetworking.fabric
 
-    modImplementation fabric.trinkets
-    modImplementation fabric.bundles.cca
+    modImplementation libs.trinkets.fabric
+    modImplementation libs.bundles.cca.fabric
 
-    modCompileOnly (fabric.modmenu) {
-        transitive = false
-    }
-    modLocalRuntime (fabric.modmenu) {
-        transitive = false
-    }
+    modCompileOnly libs.modmenu.fabric
+    modLocalRuntime libs.modmenu.fabric
 
     modCompileOnly libs.figura.fabric
-//    modLocalRuntime libs.figura.fabric
-//    localRuntime libs.bundles.figura.runtime
+    modLocalRuntime libs.figura.fabric
+    localRuntime libs.bundles.figura.runtime
 
     modCompileOnly variantOf(libs.emi.fabric) { classifier 'api' }
+    modLocalRuntime libs.emi.fabric
 }
 
 loom {
     mods {
         "${mod_id}" {
-            // Tell Loom about each source set used by your mod here. This ensures that your mod's classes are properly transformed by Loader.
             sourceSet("main")
         }
     }
     mixin {
-        useLegacyMixinAp = false
+        useLegacyMixinAp.set(false)
     }
 
     runs {
         configureEach {
+            ideConfigGenerated(true)
             it.property('mixin.debug', 'true')
+            it.property('sparkweave.debug', 'true')
         }
 
         client {
             client()
             setConfigName("Fabric Client")
-            ideConfigGenerated(true)
             runDir("run")
 
             if (rootProject.hasProperty('mc_uuid')) {
@@ -79,7 +78,6 @@ loom {
         server {
             server()
             setConfigName("Fabric Server")
-            ideConfigGenerated(true)
             runDir("run/server")
         }
     }

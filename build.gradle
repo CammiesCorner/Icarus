@@ -9,7 +9,7 @@ group = maven_group_id
 
 def ENV = System.getenv()
 def NOW = new Date()
-def buildTime = ENV.BUILD_TIME ?: NOW.format('yyyyMMddHHmmss')
+def buildTime = ENV.BUILD_TIME ?: NOW.format('yy.MMdd.HHmm')
 
 boolean isPreviewBuild = !ENV.TAG || ENV.TAG.matches(".+-.+")
 def buildNumber = !ENV.TAG ? ("${ENV.BUILD_NUMBER ? "build.${ENV.BUILD_NUMBER}" : buildTime}") : ""
@@ -20,9 +20,99 @@ def mod_name = rootProject.name.replaceAll("-", "_").toLowerCase(Locale.ROOT)
 println("Building ${project.name} ${version}")
 
 subprojects {
-	apply plugin: 'java'
+	apply plugin: 'java-library'
 	project.group = rootProject.group
 	project.version = rootProject.version
+
+	repositories {
+		mavenCentral()
+		maven {
+			name = "Sponge"
+			url = "https://repo.spongepowered.org/repository/maven-public"
+			content {
+				includeGroup "org.spongepowered"
+			}
+		}
+		exclusiveContent {
+			forRepository {
+				maven {
+					name = "ParchmentMC"
+					url = "https://maven.parchmentmc.org"
+				}
+			}
+			filter {
+				includeGroupAndSubgroups("org.parchmentmc")
+			}
+		}
+		maven {
+			name = "FabricMC"
+			url = "https://maven.fabricmc.net"
+		}
+		maven {
+			name = "NeoForge"
+			url = "https://maven.neoforged.net/releases"
+		}
+
+		// our own maven
+		maven {
+			name = "Up-Mods"
+			url = "https://maven.uuid.gg/releases"
+		}
+
+		// third party maven repositories
+		maven {
+			name = "Ladysnake"
+			url = "https://maven.ladysnake.org/releases"
+		}
+		maven {
+			name = "TeamResourceful"
+			url = "https://maven.teamresourceful.com/repository/maven-releases"
+		}
+		maven {
+			name = "JourneyMap"
+			url = "https://jm.gserv.me/repository/maven-public"
+		}
+		maven {
+			name = "TerraformersMC"
+			url = "https://maven.terraformersmc.com/releases"
+		}
+		maven {
+			name = "Shedaniel"
+			url = "https://maven.shedaniel.me"
+		}
+		maven {
+			name = "FiguraMC"
+			url = "https://maven.figuramc.org/releases"
+		}
+		maven {
+			name = "TheIllusiveC4"
+			url = "https://maven.theillusivec4.top"
+		}
+
+		// mod platforms
+		exclusiveContent {
+			forRepository {
+				maven {
+					name = "Modrinth"
+					url = "https://api.modrinth.com/maven"
+				}
+			}
+			filter {
+				includeGroup "maven.modrinth"
+			}
+		}
+		exclusiveContent {
+			forRepository {
+				maven {
+					name = "CurseMaven"
+					url = "https://www.cursemaven.com"
+				}
+			}
+			filter {
+				includeGroup "curse.maven"
+			}
+		}
+	}
 
     java {
         toolchain {
@@ -30,10 +120,11 @@ subprojects {
             vendor = JvmVendorSpec.MICROSOFT
         }
         withSourcesJar()
+		withJavadocJar()
     }
 
 	javadoc {
-		options.tags = ["reason"]
+		options.tags = ["reason", "implNote"]
 	}
 
     base {
@@ -42,7 +133,7 @@ subprojects {
 
 	jar {
 		from(rootProject.file("LICENSE.md")) {
-			rename { "LICENSE_${mod_name}.md" }
+			rename "LICENSE.md", "LICENSE_${mod_id}.md"
 		}
 		manifest {
 			attributes([
@@ -61,98 +152,11 @@ subprojects {
 
 	sourcesJar {
 		from(rootProject.file("LICENSE.md")) {
-			rename { "LICENSE_${mod_name}.md" }
+			rename "LICENSE.md", "LICENSE_${mod_id}.md"
 		}
-	}
-
-	repositories {
-		mavenCentral()
-
-		maven {
-			name = "Sponge"
-			url = "https://repo.spongepowered.org/repository/maven-public"
-			content {
-				includeGroup "org.spongepowered"
-			}
-		}
-
-		maven {
-			name = "ParchmentMC"
-			url = "https://maven.parchmentmc.org"
-			content {
-				includeGroupByRegex "org\\.parchmentmc(\\..*)?"
-			}
-		}
-
-		maven {
-			name = "Quilt"
-			url = "https://maven.quiltmc.org/repository/release"
-		}
-
-		maven {
-			name = "Fabric"
-			url = "https://maven.fabricmc.net"
-		}
-
-		maven {
-			name = "NeoForge"
-			url = "https://maven.neoforged.net/releases"
-		}
-
-		maven {
-			name = "Up-Mods"
-			url = "https://maven.uuid.gg/releases"
-		}
-
-		maven {
-			name = "Ladysnake"
-			url = "https://maven.ladysnake.org/releases"
-		}
-
-		maven {
-			name = "TeamResourceful"
-			url = "https://maven.teamresourceful.com/repository/maven-releases"
-		}
-
-		maven {
-			name = "JourneyMap"
-			url = "https://jm.gserv.me/repository/maven-public"
-		}
-
-		maven {
-			name = "TerraformersMC"
-			url = "https://maven.terraformersmc.com/releases"
-		}
-
-		maven {
-			name = "Shedaniel"
-			url = "https://maven.shedaniel.me"
-		}
-
-		maven {
-			name = "FiguraMC"
-			url = "https://maven.figuramc.org/releases"
-		}
-
-		maven {
-			name = "Modrinth"
-			url = "https://api.modrinth.com/maven"
-			content {
-				includeGroup "maven.modrinth"
-			}
-		}
-
-        maven {
-            name = "CurseMaven"
-            url = "https://www.cursemaven.com"
-            content {
-                includeGroup "curse.maven"
-            }
-        }
 	}
 
 	tasks.withType(JavaCompile).configureEach {
-		it.options.encoding = "UTF-8"
 		it.options.release.set(javaVersion)
 	}
 
@@ -174,7 +178,8 @@ subprojects {
 			"curseforge_id"					: curseforge_id,
 			"modrinth_id"					: modrinth_id,
 
-			"fabric_loader_version"         : fabric.versions.fabric.loader.get(),
+			"fabric_loader_version"         : libs.versions.fabric.loader.get(),
+			"neoforge_version"				: libs.versions.neoforge.get(),
 			"java_version"					: javaVersion
 		]
 

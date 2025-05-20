@@ -2,10 +2,13 @@ plugins {
 	alias libs.plugins.moddevgradle
 }
 
+neoForge.neoFormVersion = libs.versions.neoform.get()
+
 dependencies {
-	annotationProcessor libs.mixin.extras
 	compileOnly libs.bundles.mixin
-    compileOnly libs.jetbrains.annotations
+	annotationProcessor libs.mixin.extras
+	compileOnly libs.jetbrains.annotations
+	compileOnly libs.autoservice.annotations
 
 	compileOnly libs.sparkweave
 	compileOnly libs.resourcefulconfig
@@ -14,13 +17,20 @@ dependencies {
 	compileOnly libs.figura
 
 	compileOnly variantOf(libs.emi) { classifier 'api' }
+
+	testImplementation libs.junit.api
+	testRuntimeOnly libs.junit.launcher
 }
 
 neoForge {
-	neoFormVersion = libs.versions.neoform.get()
-
 	parchment {
 		minecraftVersion = libs.versions.parchment.minecraft.get()
 		mappingsVersion = libs.versions.parchment.mappings.get()
 	}
+}
+
+test {
+	useJUnitPlatform()
+
+	workingDir(project.file("run"))
 }

@@ -23,7 +23,7 @@ config = "${mod_id}.neoforge.mixins.json"
 # https://docs.neoforged.net/docs/gettingstarted/modfiles#dependency-configurations
 [dependencies]
 "${mod_id}" = [
-    { modId = "neoforge", type = "required", versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { ignore = true } },
+    { modId = "neoforge", type = "required", versionRange = "[${neoforge_version},)", ordering = "NONE", side = "BOTH", mc-publish = { ignore = true } },
     { modId = "minecraft", type = "required", versionRange = "[${minecraft_version}]", ordering = "NONE", side = "BOTH" },
     { modId = "caelus", type = "required", versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "308989", modrinth = "40FYwb4z" } },
     { modId = "commonnetworking", type = "required", versionRange = "*", ordering = "NONE", side = "BOTH", mc-publish = { curseforge = "806044", modrinth = "HIuqnQpi" } },

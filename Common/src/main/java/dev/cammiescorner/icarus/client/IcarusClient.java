@@ -1,5 +1,6 @@
 package dev.cammiescorner.icarus.client;
 
+import com.google.auto.service.AutoService;
 import com.google.common.base.MoreObjects;
 import dev.cammiescorner.icarus.client.models.*;
 import dev.cammiescorner.icarus.init.IcarusItemTags;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+@AutoService(ClientEntryPoint.class)
 public class IcarusClient implements ClientEntryPoint {
 
     private static final List<Predicate<LivingEntity>> renderPredicates = new ArrayList<>();

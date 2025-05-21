@@ -1,9 +1,11 @@
 package dev.cammiescorner.icarus.neoforge.service;
 
+import com.google.auto.service.AutoService;
 import dev.cammiescorner.icarus.util.IcarusPlatformBootstrapService;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.fml.loading.moddiscovery.ModInfo;
 
+@AutoService(IcarusPlatformBootstrapService.class)
 public class IcarusNeoforgePlatformBootstrapService implements IcarusPlatformBootstrapService {
 
     @Override

@@ -1,5 +1,6 @@
 package dev.cammiescorner.icarus;
 
+import com.google.auto.service.AutoService;
 import com.teamresourceful.resourcefulconfig.api.loader.Configurator;
 import commonnetwork.api.Network;
 import dev.cammiescorner.icarus.init.IcarusItems;
@@ -15,6 +16,7 @@ import dev.upcraft.sparkweave.api.platform.services.RegistryService;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
+@AutoService(MainEntryPoint.class)
 public class Icarus implements MainEntryPoint {
 
     public static final String MODID = "icarus";

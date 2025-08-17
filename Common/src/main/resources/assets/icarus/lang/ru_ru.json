@@ -98,7 +98,7 @@
   "config.icarus.wings_speed": "Как быстро могут летать крылья",
   "config.icarus.wings_durability": "Насколько долговечны все крылья",
   "config.icarus.exhaustion_amount": "Стоимость истощения полета",
-  "config.icarus.required_food_amount": "Сколько (половин) едениц голода потребуется для полета",
+  "config.icarus.required_food_amount": "Сколько (половин) единиц голода потребуется для полета",
   "config.icarus.max_height_enabled": "Следует ли предотвращать полет выше максимально допустимой высоты",
   "config.icarus.max_height_above_world": "Максимальная высота над пределом построения мира, на которую могут летать игроки",
   "config.icarus.flying_target_radius": "Насколько увеличивается хитбокс прицеливания летающего игрока",

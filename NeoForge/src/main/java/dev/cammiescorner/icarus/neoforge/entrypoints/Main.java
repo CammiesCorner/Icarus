@@ -4,14 +4,13 @@ import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.item.WingItem;
 import dev.cammiescorner.icarus.util.IcarusHelper;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import top.theillusivec4.curios.api.CuriosApi;
 
 @Mod(Icarus.MODID)
 public class Main {
 
-    public Main(IEventBus bus) {
+    public Main() {
         IcarusHelper.getEquippedWings = entity -> {
             var component = CuriosApi.getCuriosInventory(entity);
             if (component.isPresent()) {

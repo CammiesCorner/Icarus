@@ -2,7 +2,7 @@
   "parent": "minecraft:item/generated",
   "textures":
   {
-    "layer0": "icarus:item/mechanical_feathered_wings",
-    "layer1": "icarus:item/mechanical_feathered_wings_2"
+    "layer0": "icarus:item/white_mechanical_feathered_wings",
+    "layer1": "icarus:item/orange_mechanical_feathered_wings_2"
   }
 }

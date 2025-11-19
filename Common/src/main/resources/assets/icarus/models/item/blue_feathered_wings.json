@@ -2,6 +2,6 @@
   "parent": "minecraft:item/generated",
   "textures":
   {
-    "layer0": "icarus:item/feathered_wings"
+    "layer0": "icarus:item/blue_feathered_wings"
   }
 }

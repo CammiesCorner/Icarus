@@ -2,7 +2,7 @@
   "parent": "minecraft:item/generated",
   "textures":
   {
-    "layer0": "icarus:item/dragon_wings",
-    "layer1": "icarus:item/dragon_wings_2"
+    "layer0": "icarus:item/pink_dragon_wings",
+    "layer1": "icarus:item/pink_dragon_wings_2"
   }
 }

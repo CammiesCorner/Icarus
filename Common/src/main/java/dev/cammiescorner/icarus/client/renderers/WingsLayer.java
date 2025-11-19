@@ -8,6 +8,7 @@ import dev.cammiescorner.icarus.client.IcarusModels;
 import dev.cammiescorner.icarus.client.models.*;
 import dev.cammiescorner.icarus.init.IcarusItems;
 import dev.cammiescorner.icarus.item.WingItem;
+import it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -16,11 +17,14 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
 
 //TODO clean up
 public class WingsLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
@@ -30,6 +34,8 @@ public class WingsLayer<T extends LivingEntity, M extends EntityModel<T>> extend
     private final FlandresWingsModel<T> flandresWings;
     private final DiscordsWingsModel<T> discordsWings;
     private final ZanzasWingsModel<T> zanzasWings;
+
+    private static final Map<Item, ResourceLocation[]> TEXTURE_LOOKUP = new Reference2ObjectOpenHashMap<>();
 
     public WingsLayer(RenderLayerParent<T, M> context, EntityModelSet loader) {
         super(context);
@@ -46,9 +52,6 @@ public class WingsLayer<T extends LivingEntity, M extends EntityModel<T>> extend
         var stack = IcarusAPIClient.getWingsForRendering(entity);
 
         if (stack.getItem() instanceof WingItem wingItem && IcarusClient.shouldRenderWings(entity)) {
-            var primaryColor = FastColor.ARGB32.color(255, wingItem.getPrimaryColor(stack).getTextureDiffuseColor());
-            var secondaryColor = FastColor.ARGB32.color(255, wingItem.getSecondaryColor(stack).getTextureDiffuseColor());
-
             var wingModel = switch (wingItem.getWingType()) {
                 case FEATHERED, MECHANICAL_FEATHERED -> featheredWings;
                 case DRAGON, MECHANICAL_LEATHER -> leatherWings;
@@ -71,15 +74,20 @@ public class WingsLayer<T extends LivingEntity, M extends EntityModel<T>> extend
                 return;
             }
 
-            ResourceLocation layer1 = wingItem.getWingType().getTextureLayer1(stack);
-            ResourceLocation layer2 = wingItem.getWingType().getTextureLayer2(stack);
+            var textures = TEXTURE_LOOKUP.computeIfAbsent(wingItem, item -> {
+                var baseId = BuiltInRegistries.ITEM.getKey(item).withPrefix("textures/entity/icarus/wings/");
+                return new ResourceLocation[] {
+                    baseId.withSuffix(".png"),
+                    baseId.withSuffix("_2.png")
+                };
+            });
 
             pose.pushPose();
             pose.translate(0.0D, 0.0D, 0.125D);
             this.getParentModel().copyPropertiesTo(wingModel);
             wingModel.setupAnim(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
-            this.renderWings(wingModel, pose, bufferSource, stack, RenderType.entityTranslucent(layer2), light, secondaryColor);
-            this.renderWings(wingModel, pose, bufferSource, stack, RenderType.entityTranslucent(layer1), light, primaryColor);
+            this.renderWings(wingModel, pose, bufferSource, stack, RenderType.entityTranslucent(textures[0]), light, 0xFFFFFFFF);
+            this.renderWings(wingModel, pose, bufferSource, stack, RenderType.entityTranslucent(textures[1]), light, 0xFFFFFFFF);
             pose.popPose();
         }
     }

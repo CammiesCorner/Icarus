@@ -6,29 +6,29 @@ parchment_minecraft = "1.21.1"
 parchment_mappings = "2024.11.17"
 
 # https://projects.neoforged.net/neoforged/moddevgradle
-moddevgradle = "2.0.88"
+moddevgradle = "2.0.119"
 # https://projects.neoforged.net/neoforged/neoform
 neoform = "1.21.1-20240808.144430"
 
 # NeoForge
 # https://projects.neoforged.net/neoforged/neoforge
-neoforge = "21.1.172"
+neoforge = "21.1.215"
 
 # Fabric
 # https://fabricmc.net/develop
-fabric_loom = "1.10.5" # https://maven.fabricmc.net/fabric-loom/fabric-loom.gradle.plugin
-fabric_loader = "0.16.14"
-fabric_api = "0.116.0+1.21.1"
+fabric_loom = "1.13.4" # https://maven.fabricmc.net/fabric-loom/fabric-loom.gradle.plugin
+fabric_loader = "0.17.3"
+fabric_api = "0.116.7+1.21.1"
 
 # Minecraft dependencies
-jetbrains_annotations = "26.0.2"
+jetbrains_annotations = "26.0.2-1"
 mixin = "0.15.5+mixin.0.8.7"
-mixin_extras = "0.4.1"
-asm = "9.7.1"
+mixin_extras = "0.5.0"
+asm = "9.8"
 
 # Other dependencies
 autoservice = "1.1.1"
-junit = "5.12.2"
+junit = "6.0.1"
 
 # Mods
 # https://modrinth.com/mod/cardinal-components-api/versions
@@ -38,7 +38,7 @@ curios = "9.5.1+1.21.1"
 # https://modrinth.com/mod/caelus/versions
 caelus = "7.0.1+1.21.1"
 # https://modrinth.com/mod/common-network/versions
-commonnetworking = "1.0.18-1.21.1"
+commonnetworking = "1.0.21-1.21.1"
 # https://modrinth.com/mod/emi/versions
 emi = "1.1.22+1.21.1"
 # https://modrinth.com/mod/figura/versions

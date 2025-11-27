@@ -7,6 +7,7 @@ import dev.cammiescorner.icarus.init.IcarusDimensionTypeTags;
 import dev.cammiescorner.icarus.init.IcarusItemTags;
 import dev.cammiescorner.icarus.init.IcarusStatusEffects;
 import dev.cammiescorner.icarus.item.WingItem;
+import dev.cammiescorner.icarus.network.c2s.ApplyBoostPacket;
 import dev.cammiescorner.icarus.network.s2c.SyncConfigValuesPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
@@ -85,7 +86,7 @@ public class IcarusHelper {
 
             if ((wings == null || !wings.is(IcarusItemTags.FREE_FLIGHT)) && entity instanceof Player player && !player.isCreative()) {
                 if(player.getFoodData().getFoodLevel() >= cfg.requiredFoodAmount() && player.zza > 0) {
-                    player.getFoodData().addExhaustion(cfg.exhaustionAmount());
+                    ApplyBoostPacket.sendToServer();
                 }
 
                 if (player.getFoodData().getFoodLevel() < cfg.requiredFoodAmount()) {

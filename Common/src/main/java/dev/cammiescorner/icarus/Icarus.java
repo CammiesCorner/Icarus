@@ -5,6 +5,7 @@ import com.teamresourceful.resourcefulconfig.api.loader.Configurator;
 import commonnetwork.api.Network;
 import dev.cammiescorner.icarus.init.IcarusItems;
 import dev.cammiescorner.icarus.init.IcarusStatusEffects;
+import dev.cammiescorner.icarus.network.c2s.ApplyBoostPacket;
 import dev.cammiescorner.icarus.network.s2c.SyncConfigValuesPacket;
 import dev.cammiescorner.icarus.util.IcarusHelper;
 import dev.cammiescorner.icarus.util.ServerPlayerFallbackValues;
@@ -31,6 +32,7 @@ public class Icarus implements MainEntryPoint {
         CONFIGURATOR.register(IcarusConfig.class);
 
         Network.registerPacket(SyncConfigValuesPacket.TYPE, SyncConfigValuesPacket.class, SyncConfigValuesPacket.STREAM_CODEC, SyncConfigValuesPacket::handle);
+        Network.registerPacket(ApplyBoostPacket.TYPE, ApplyBoostPacket.class, ApplyBoostPacket.STREAM_CODEC, ApplyBoostPacket::handle);
 
         LifeCycleEvents.SERVER_STARTING.register(server -> IcarusHelper.fallbackValues = new ServerPlayerFallbackValues());
         EntityTickEvents.startTick(ServerPlayer.class).register(IcarusHelper::onPlayerTick);

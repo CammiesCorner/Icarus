@@ -1,6 +1,6 @@
 package dev.cammiescorner.icarus.mixin.client;
 
-import dev.cammiescorner.icarus.client.IcarusClientConfig;
+import dev.cammiescorner.icarus.client.ClientPlayerFallbackValues;
 import dev.cammiescorner.icarus.util.IcarusHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
@@ -19,8 +19,14 @@ public class MouseHandlerMixin {
 
     @ModifyArg(method = "turnPlayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;turn(DD)V"), index = 0)
     public double changeLookDirectionX(double x) {
-        if (minecraft.player != null && minecraft.player.isFallFlying() && IcarusClientConfig.canLoopDeLoop && IcarusHelper.hasWings(minecraft.player) && IcarusHelper.getConfigValues(minecraft.player).canLoopDeLoop() && (minecraft.player.getXRot() > 90 || minecraft.player.getXRot() < -90))
+        var player = minecraft.player;
+
+        // we inject inside a null check so this is just to make the IDE happy
+        assert player != null;
+
+        if ((player.getXRot() > 90 || player.getXRot() < -90) && ClientPlayerFallbackValues.canClientLoopDeLoop(player) && player.isFallFlying() && IcarusHelper.hasWings(player) && IcarusHelper.getConfigValues(player).canLoopDeLoop()) {
             return -x;
+        }
 
         return x;
     }

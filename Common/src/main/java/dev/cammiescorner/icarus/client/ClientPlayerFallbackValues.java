@@ -1,8 +1,9 @@
 package dev.cammiescorner.icarus.client;
 
-import dev.cammiescorner.icarus.IcarusConfig;
 import dev.cammiescorner.icarus.api.IcarusPlayerValues;
 import dev.cammiescorner.icarus.util.ServerPlayerFallbackValues;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.LivingEntity;
 
 public class ClientPlayerFallbackValues extends ServerPlayerFallbackValues implements IcarusPlayerValues {
 
@@ -43,5 +44,13 @@ public class ClientPlayerFallbackValues extends ServerPlayerFallbackValues imple
     @Override
     public float requiredFoodAmount() {
         return requiredFoodAmount;
+    }
+
+    /**
+     * used to test whether an entity is allowed to do a loop clientside,
+     * with special handling for the current client player entity.
+     */
+    public static boolean canClientLoopDeLoop(LivingEntity entity) {
+        return IcarusClientConfig.canLoopDeLoop || entity != Minecraft.getInstance().player;
     }
 }

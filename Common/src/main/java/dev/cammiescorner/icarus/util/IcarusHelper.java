@@ -85,7 +85,7 @@ public class IcarusHelper {
             }
 
             if ((wings == null || !wings.is(IcarusItemTags.FREE_FLIGHT)) && entity instanceof Player player && !player.isCreative()) {
-                if(player.getFoodData().getFoodLevel() >= cfg.requiredFoodAmount() && player.zza > 0) {
+                if(player.getFoodData().getFoodLevel() >= cfg.requiredFoodAmount() && player.zza > 0 && level.isClientSide()) {
                     ApplyBoostPacket.sendToServer();
                 }
 

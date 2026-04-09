@@ -6,19 +6,13 @@ on:
       - '*'
 
 env:
-  JAVA_VERSION: 21
+  JAVA_VERSION: 25
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up JDK ${{ env.JAVA_VERSION }}
-        uses: actions/setup-java@v4
-        with:
-          java-version: ${{ env.JAVA_VERSION }}
-          distribution: 'microsoft'
-          cache: 'gradle'
+      - uses: actions/checkout@v6
       - name: Get current time
         uses: srfrnk/current-time@master
         id: current-time
@@ -29,6 +23,13 @@ jobs:
       - name: Copy Maven Upload URL
         id: extract_maven_upload_url
         run: echo "maven_upload_url=${{secrets.MAVEN_UPLOAD_URL}}" >> $GITHUB_OUTPUT
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v5
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'microsoft'
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
       - name: Build with Gradle

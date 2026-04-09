@@ -6,19 +6,20 @@ on:
   pull_request:
 
 env:
-  JAVA_VERSION: 21
+  JAVA_VERSION: 25
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Set up JDK ${{ env.JAVA_VERSION }}
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: 'microsoft'
-          cache: 'gradle'
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
       - name: Build with Gradle
@@ -28,7 +29,7 @@ jobs:
           GRADLE_BUILD_CACHE_TOKEN: ${{ secrets.GRADLE_BUILD_CACHE_TOKEN }}
       - name: Upload build artifacts (Common)
         continue-on-error: true
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ github.event.repository.name }}-Common-${{ github.sha }}
           path: |
@@ -36,7 +37,7 @@ jobs:
             !Common/build/libs/*-dev.jar
       - name: Upload build artifacts (Forge)
         continue-on-error: true
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ github.event.repository.name }}-Forge-${{ github.sha }}
           path: |
@@ -44,7 +45,7 @@ jobs:
             !Forge/build/libs/*-dev.jar
       - name: Upload build artifacts (Fabric)
         continue-on-error: true
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ github.event.repository.name }}-Fabric-${{ github.sha }}
           path: |

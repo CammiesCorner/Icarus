@@ -108,5 +108,5 @@
 
   "message.icarus.status.no_fly.dimension": "В этом измерении летать запрещено!",
   "message.icarus.status.no_fly.hunger": "Нельзя лететь с пустым желудком!",
-  "message.icarus.status.no_fly.status_effect": "Вы не можете летать прямо сейчас!",
+  "message.icarus.status.no_fly.status_effect": "Вы не можете летать прямо сейчас!"
 }

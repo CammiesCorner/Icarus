@@ -2,7 +2,7 @@
 minecraft = "1.20.1"
 
 # https://projects.neoforged.net/neoforged/moddevgradle
-moddevgradle_legacy = "2.0.76"
+moddevgradle = "2.0.141"
 
 # The latest versions are available at https://parchmentmc.org/docs/getting-started
 parchment_minecraft = "1.20.1"
@@ -58,4 +58,4 @@ mixin = ["mixin", "mixinextras_common", "asm", "asm_analysis", "asm_commons", "a
 figura_runtime = ["luaj_core", "luaj_jse", "nv_websocket"]
 
 [plugins]
-moddevgradle_legacy = { id = "net.neoforged.moddev.legacyforge", version.ref = "moddevgradle_legacy" }
+moddevgradle_legacy = { id = "net.neoforged.moddev.legacyforge", version.ref = "moddevgradle" }

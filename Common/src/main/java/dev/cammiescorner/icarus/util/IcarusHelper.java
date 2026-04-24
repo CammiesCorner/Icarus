@@ -9,6 +9,7 @@ import dev.cammiescorner.icarus.init.IcarusStatusEffects;
 import dev.cammiescorner.icarus.item.WingItem;
 import dev.cammiescorner.icarus.network.c2s.ApplyBoostPacket;
 import dev.cammiescorner.icarus.network.s2c.SyncConfigValuesPacket;
+import dev.cammiescorner.icarus.network.s2c.SyncFlightStaminaPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -25,7 +26,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class IcarusHelper {
-
     @ApiStatus.Internal
     public static Predicate<LivingEntity> hasWings = entity -> false;
 
@@ -84,14 +84,16 @@ public class IcarusHelper {
                 return false;
             }
 
-            if ((wings == null || !wings.is(IcarusItemTags.FREE_FLIGHT)) && entity instanceof Player player && !player.isCreative()) {
-                if(player.getFoodData().getFoodLevel() >= cfg.requiredFoodAmount() && player.zza > 0 && level.isClientSide()) {
+            if ((wings == null || !wings.is(IcarusItemTags.FREE_FLIGHT)) && entity instanceof Player player && player instanceof StaminaProvider provider && !player.isCreative()) {
+                boolean canFly = cfg.useStaminaForFlight() ? provider.icarus$getStamina() > 0 : player.getFoodData().getFoodLevel() >= cfg.requiredFoodAmount();
+
+                if(canFly && player.zza > 0 && level.isClientSide()) {
                     ApplyBoostPacket.sendToServer();
                 }
 
-                if (player.getFoodData().getFoodLevel() < cfg.requiredFoodAmount()) {
+                if (!canFly) {
                     stopFlying(player);
-                    Component message = Component.translatable("message.icarus.status.no_fly.hunger").withStyle(ChatFormatting.BLUE);
+                    Component message = (cfg.useStaminaForFlight() ? Component.translatable("message.icarus.status.no_fly.stamina") : Component.translatable("message.icarus.status.no_fly.hunger")).withStyle(ChatFormatting.BLUE);
                     if (entity instanceof ServerPlayer serverPlayer) {
                         serverPlayer.sendSystemMessage(message, true);
                     } else {
@@ -152,5 +154,8 @@ public class IcarusHelper {
 
     public static void onServerPlayerJoin(ServerPlayer player) {
         SyncConfigValuesPacket.send(player);
+
+        if(player instanceof StaminaProvider provider)
+            SyncFlightStaminaPacket.send(player, provider.icarus$getStamina());
     }
 }

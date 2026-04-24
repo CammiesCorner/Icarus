@@ -5,13 +5,13 @@ import commonnetwork.networking.data.PacketContext;
 import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.init.IcarusItemTags;
 import dev.cammiescorner.icarus.util.IcarusHelper;
+import dev.cammiescorner.icarus.util.StaminaProvider;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 
 public record ApplyBoostPacket() {
-
     private static final ApplyBoostPacket INSTANCE = new ApplyBoostPacket();
     public static final ResourceLocation ID = Icarus.id("apply_boost");
     public static final CustomPacketPayload.Type<CustomPacketPayload> TYPE = new CustomPacketPayload.Type<>(ID);
@@ -25,7 +25,12 @@ public record ApplyBoostPacket() {
         var player = ctx.sender();
         var wings = IcarusHelper.getEquippedWings(player);
         if(wings == null || !wings.is(IcarusItemTags.FREE_FLIGHT)) {
-            player.getFoodData().addExhaustion(IcarusHelper.getConfigValues(player).exhaustionAmount());
+            var cfg = IcarusHelper.getConfigValues(player);
+
+            if(cfg.useStaminaForFlight() && player instanceof StaminaProvider provider)
+                provider.icarus$modifyStamina(-1f);
+            else
+                player.getFoodData().addExhaustion(cfg.exhaustionAmount());
         }
     }
 }

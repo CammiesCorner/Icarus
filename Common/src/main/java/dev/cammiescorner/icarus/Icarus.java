@@ -7,6 +7,7 @@ import dev.cammiescorner.icarus.init.IcarusItems;
 import dev.cammiescorner.icarus.init.IcarusStatusEffects;
 import dev.cammiescorner.icarus.network.c2s.ApplyBoostPacket;
 import dev.cammiescorner.icarus.network.s2c.SyncConfigValuesPacket;
+import dev.cammiescorner.icarus.network.s2c.SyncFlightStaminaPacket;
 import dev.cammiescorner.icarus.util.IcarusHelper;
 import dev.cammiescorner.icarus.util.ServerPlayerFallbackValues;
 import dev.upcraft.sparkweave.api.entrypoint.MainEntryPoint;
@@ -32,6 +33,7 @@ public class Icarus implements MainEntryPoint {
         CONFIGURATOR.register(IcarusConfig.class);
 
         Network.registerPacket(SyncConfigValuesPacket.TYPE, SyncConfigValuesPacket.class, SyncConfigValuesPacket.STREAM_CODEC, SyncConfigValuesPacket::handle);
+        Network.registerPacket(SyncFlightStaminaPacket.TYPE, SyncFlightStaminaPacket.class, SyncFlightStaminaPacket.STREAM_CODEC, SyncFlightStaminaPacket::handle);
         Network.registerPacket(ApplyBoostPacket.TYPE, ApplyBoostPacket.class, ApplyBoostPacket.STREAM_CODEC, ApplyBoostPacket::handle);
 
         LifeCycleEvents.SERVER_STARTING.register(server -> IcarusHelper.fallbackValues = new ServerPlayerFallbackValues());

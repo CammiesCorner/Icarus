@@ -25,6 +25,8 @@ public interface IcarusPlayerValues {
 
     boolean maxHeightEnabled();
 
+    boolean useStaminaForFlight();
+
     default TagKey<LevelStem> noFlyingAllowedInLevels() {
         return IcarusLevelTags.NO_FLYING_ALLOWED;
     }

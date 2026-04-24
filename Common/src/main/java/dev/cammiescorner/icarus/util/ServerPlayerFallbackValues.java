@@ -41,6 +41,11 @@ public class ServerPlayerFallbackValues implements IcarusPlayerValues {
     }
 
     @Override
+    public boolean useStaminaForFlight() {
+        return IcarusConfig.useStaminaForFlight;
+    }
+
+    @Override
     public int maxHeightAboveWorld() {
         return IcarusConfig.maxHeightAboveWorld;
     }

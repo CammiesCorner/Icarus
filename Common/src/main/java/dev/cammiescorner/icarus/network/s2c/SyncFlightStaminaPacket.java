@@ -39,6 +39,7 @@ public record SyncFlightStaminaPacket(float stamina) {
 			Minecraft.getInstance().execute(() -> {
 				var client = Minecraft.getInstance();
 
+				// TODO why you no sync???
 				if(client.player instanceof StaminaProvider provider)
 					provider.icarus$setStamina(ctx.message().stamina());
 			});

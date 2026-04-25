@@ -18,7 +18,12 @@ public class IcarusStaminaOverlay {
 		if(!player.isCreative() && player instanceof StaminaProvider provider && IcarusHelper.hasWings(player)) {
 			var client = Minecraft.getInstance();
 			int x = client.getWindow().getGuiScaledWidth() / 2 - 9;
-			int y = client.getWindow().getGuiScaledHeight() - 43;
+			int y = client.getWindow().getGuiScaledHeight() - 41;
+
+			if(player.experienceLevel != 0) {
+				y -= 8;
+			}
+
 			var staminaRatio = provider.icarus$getStamina() / provider.icarus$getMaxStamina();
 			var targetHeight = Mth.floor(9 * staminaRatio);
 

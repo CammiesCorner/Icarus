@@ -14,6 +14,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -24,6 +25,9 @@ public abstract class PlayerMixin extends LivingEntity implements SlowFallingEnt
     @Unique private boolean icarus$slowFalling;
     @Unique public float icarus$flightStamina;
 
+    @Shadow
+    public abstract boolean isCreative();
+
     private PlayerMixin(EntityType<? extends LivingEntity> $$0, Level $$1) {
         super($$0, $$1);
         throw new UnsupportedOperationException();
@@ -32,7 +36,7 @@ public abstract class PlayerMixin extends LivingEntity implements SlowFallingEnt
     @Inject(method = "tick", at = @At("TAIL"))
     private void tickStamina(CallbackInfo ci) {
         if(!level().isClientSide() && onGround() && icarus$getStamina() < icarus$getMaxStamina())
-            icarus$modifyStamina(IcarusHelper.getConfigValues(this).staminaRegen());
+            icarus$modifyStamina(this.isCreative() ? icarus$getMaxStamina() : IcarusHelper.getConfigValues(this).staminaRegen());
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))

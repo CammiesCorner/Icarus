@@ -23,8 +23,9 @@ public record ApplyBoostPacket() {
 
     public static void handle(PacketContext<ApplyBoostPacket> ctx) {
         var player = ctx.sender();
+
         var wings = IcarusHelper.getEquippedWings(player);
-        if(wings == null || !wings.is(IcarusItemTags.FREE_FLIGHT)) {
+        if((wings == null || !wings.is(IcarusItemTags.FREE_FLIGHT)) && !player.isCreative()) {
             var cfg = IcarusHelper.getConfigValues(player);
 
             if(cfg.useStaminaForFlight() && player instanceof StaminaProvider provider)

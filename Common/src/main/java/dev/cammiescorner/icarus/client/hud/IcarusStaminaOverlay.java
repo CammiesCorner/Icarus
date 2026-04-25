@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class IcarusStaminaOverlay {
 	private static final ResourceLocation OVERLAY_TEXTURE = Icarus.id("textures/hud/stamina.png");
+	public static final ResourceLocation ID = Icarus.id("stamina");
 
 	public static void render(GuiGraphics guiGraphics, DeltaTracker tickDelta, LocalPlayer player) {
 		if(!player.isCreative() && player instanceof StaminaProvider provider && IcarusHelper.hasWings(player)) {

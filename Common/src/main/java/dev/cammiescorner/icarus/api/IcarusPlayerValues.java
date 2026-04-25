@@ -27,6 +27,10 @@ public interface IcarusPlayerValues {
 
     boolean useStaminaForFlight();
 
+    float staminaAmount();
+
+    float staminaRegen();
+
     default TagKey<LevelStem> noFlyingAllowedInLevels() {
         return IcarusLevelTags.NO_FLYING_ALLOWED;
     }

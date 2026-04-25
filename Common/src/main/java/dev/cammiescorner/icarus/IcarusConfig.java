@@ -54,6 +54,10 @@ public final class IcarusConfig {
     public static boolean maxHeightEnabled = true;
     @ConfigEntry(id = "use_stamina_for_flight", translation = "config.icarus.use_stamina_for_flight")
     public static boolean useStaminaForFlight = true;
+    @ConfigEntry(id = "stamina_amount", translation = "config.icarus.stamina_amount")
+    public static float staminaAmount = 1F;
+    @ConfigEntry(id = "stamina_regen", translation = "config.icarus.stamina_regen")
+    public static float staminaRegen = 2F;
     @ConfigEntry(id = "max_height_above_world", translation = "config.icarus.max_height_above_world")
     public static int maxHeightAboveWorld = 64;
     @ConfigEntry(id = "flying_target_radius", translation = "config.icarus.flying_target_radius")

@@ -101,6 +101,8 @@
   "config.icarus.required_food_amount": "How much many (half) hunger bars are required to fly.",
   "config.icarus.max_height_enabled": "Whether or not to prevent flight above the maximum height allowed",
   "config.icarus.use_stamina_for_flight": "Whether to use stamina for flying, or the old hunger system",
+  "config.icarus.stamina_amount": "How much stamina to consume while in active flight",
+  "config.icarus.stamina_regen": "How much stamina to recover while grounded",
   "config.icarus.max_height_above_world": "Maximum height above the world build limit that players can fly to",
   "config.icarus.flying_target_radius": "How much the targeting hitbox of a flying player is increased by",
   "config_category.icarus.client": "Client Settings",

@@ -4,9 +4,9 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import dev.cammiescorner.icarus.api.SlowFallingEntity;
 import dev.cammiescorner.icarus.init.IcarusAttributes;
 import dev.cammiescorner.icarus.network.s2c.SyncFlightStaminaPacket;
+import dev.cammiescorner.icarus.util.IcarusHelper;
 import dev.cammiescorner.icarus.util.StaminaProvider;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,7 +14,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,12 +21,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity implements SlowFallingEntity, StaminaProvider {
-    @Shadow
-    public abstract void displayClientMessage(Component chatComponent, boolean actionBar);
-
     @Unique private boolean icarus$slowFalling;
     @Unique public float icarus$flightStamina;
-    @Unique public LivingEntity icarus$self;
 
     private PlayerMixin(EntityType<? extends LivingEntity> $$0, Level $$1) {
         super($$0, $$1);
@@ -36,8 +31,8 @@ public abstract class PlayerMixin extends LivingEntity implements SlowFallingEnt
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void tickStamina(CallbackInfo ci) {
-        if(!level().isClientSide() && tickCount % 12 == 0 && onGround() && icarus$getStamina() < icarus$getMaxStamina())
-            icarus$modifyStamina(2f);
+        if(!level().isClientSide() && onGround() && icarus$getStamina() < icarus$getMaxStamina())
+            icarus$modifyStamina(IcarusHelper.getConfigValues(this).staminaRegen());
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
@@ -81,12 +76,10 @@ public abstract class PlayerMixin extends LivingEntity implements SlowFallingEnt
     public void icarus$setStamina(float stamina) {
         stamina = Math.clamp(stamina, 0, icarus$getMaxStamina());
 
-        if(icarus$self instanceof ServerPlayer player && icarus$flightStamina != stamina)
+        if((Player) (Object) this instanceof ServerPlayer player && icarus$flightStamina != stamina)
             SyncFlightStaminaPacket.send(player, stamina);
 
         icarus$flightStamina = stamina;
-
-        displayClientMessage(Component.literal(String.format("%s / %s", icarus$flightStamina, icarus$getMaxStamina())), true);
     }
 
     @Override

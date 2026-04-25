@@ -3,6 +3,7 @@ package dev.cammiescorner.icarus;
 import com.google.auto.service.AutoService;
 import com.teamresourceful.resourcefulconfig.api.loader.Configurator;
 import commonnetwork.api.Network;
+import dev.cammiescorner.icarus.init.IcarusAttributes;
 import dev.cammiescorner.icarus.init.IcarusItems;
 import dev.cammiescorner.icarus.init.IcarusStatusEffects;
 import dev.cammiescorner.icarus.network.c2s.ApplyBoostPacket;
@@ -39,6 +40,7 @@ public class Icarus implements MainEntryPoint {
         LifeCycleEvents.SERVER_STARTING.register(server -> IcarusHelper.fallbackValues = new ServerPlayerFallbackValues());
         EntityTickEvents.startTick(ServerPlayer.class).register(IcarusHelper::onPlayerTick);
 
+        IcarusAttributes.registerAll();
         var registryService = RegistryService.get();
         IcarusItems.ITEMS.accept(registryService);
         IcarusItems.CREATIVE_TABS.accept(registryService);

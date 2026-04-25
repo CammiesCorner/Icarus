@@ -107,7 +107,7 @@
   "config.icarus.flying_target_radius": "How much the targeting hitbox of a flying player is increased by",
   "config_category.icarus.client": "Client Settings",
 
-  "attribute.name.icarus.stamina": "Stamina",
+  "attribute.name.icarus.max_stamina": "Max Flight Stamina",
 
   "effect.icarus.flightless": "Flightless",
 

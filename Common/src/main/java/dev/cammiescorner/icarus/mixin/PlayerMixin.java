@@ -49,7 +49,7 @@ public abstract class PlayerMixin extends LivingEntity implements SlowFallingEnt
     private static AttributeSupplier.Builder createPlayerAttributes(AttributeSupplier.Builder builder) {
         IcarusAttributes.registerAll();
 
-        return builder.add(IcarusAttributes.STAMINA.holder());
+        return builder.add(IcarusAttributes.MAX_STAMINA.holder());
     }
 
     @Override
@@ -64,7 +64,7 @@ public abstract class PlayerMixin extends LivingEntity implements SlowFallingEnt
 
     @Override
     public float icarus$getMaxStamina() {
-        return (float) getAttribute(IcarusAttributes.STAMINA.holder()).getValue();
+        return (float) getAttribute(IcarusAttributes.MAX_STAMINA.holder()).getValue();
     }
 
     @Override

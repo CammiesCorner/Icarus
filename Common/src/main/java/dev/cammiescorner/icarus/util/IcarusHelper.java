@@ -85,7 +85,7 @@ public class IcarusHelper {
             }
 
             if ((wings == null || !wings.is(IcarusItemTags.FREE_FLIGHT)) && entity instanceof Player player && player instanceof StaminaProvider provider && !player.isCreative()) {
-                boolean canFly = cfg.useStaminaForFlight() ? provider.icarus$getStamina() > 0 : player.getFoodData().getFoodLevel() >= cfg.requiredFoodAmount();
+                boolean canFly = IcarusHelper.canFly(player, cfg);
 
                 if(canFly && player.zza > 0 && level.isClientSide()) {
                     ApplyBoostPacket.sendToServer();
@@ -157,5 +157,9 @@ public class IcarusHelper {
 
         if(player instanceof StaminaProvider provider)
             SyncFlightStaminaPacket.send(player, provider.icarus$getStamina());
+    }
+
+    public static boolean canFly(Player player, IcarusPlayerValues cfg) {
+        return cfg.useStaminaForFlight() ? player instanceof StaminaProvider provider && provider.icarus$getStamina() > 0 : player.getFoodData().getFoodLevel() >= cfg.requiredFoodAmount();
     }
 }

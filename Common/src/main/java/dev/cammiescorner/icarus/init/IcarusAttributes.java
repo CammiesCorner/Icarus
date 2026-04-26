@@ -13,7 +13,7 @@ public class IcarusAttributes {
 	private static volatile boolean isInitialized = false;
 	public static final RegistryHandler<Attribute> ATTRIBUTES = RegistryHandler.create(Registries.ATTRIBUTE, Icarus.MODID);
 
-	public static final RegistrySupplier<Attribute> MAX_STAMINA = ATTRIBUTES.register("max_stamina", () -> new RangedAttribute("attribute.name.icarus.max_stamina", 600, 0, Float.MAX_VALUE).setSyncable(true));
+	public static final RegistrySupplier<Attribute> MAX_STAMINA = ATTRIBUTES.register("max_stamina", () -> new RangedAttribute("attribute.name.icarus.max_stamina", 400, 0, Float.MAX_VALUE).setSyncable(true));
 
 	@ApiStatus.Internal
 	public static synchronized void registerAll() {

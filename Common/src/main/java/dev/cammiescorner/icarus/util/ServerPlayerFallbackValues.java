@@ -41,6 +41,11 @@ public class ServerPlayerFallbackValues implements IcarusPlayerValues {
     }
 
     @Override
+    public boolean dropOutOfSkyWhenTired() {
+        return IcarusConfig.dropOutOfSkyWhenTired;
+    }
+
+    @Override
     public boolean useStaminaForFlight() {
         return IcarusConfig.useStaminaForFlight;
     }

@@ -91,7 +91,7 @@ public class IcarusHelper {
                     ApplyBoostPacket.sendToServer();
                 }
 
-                if (!canFly) {
+                if (cfg.dropOutOfSkyWhenTired() && !canFly) {
                     stopFlying(player);
                     Component message = (cfg.useStaminaForFlight() ? Component.translatable("message.icarus.status.no_fly.stamina") : Component.translatable("message.icarus.status.no_fly.hunger")).withStyle(ChatFormatting.BLUE);
                     if (entity instanceof ServerPlayer serverPlayer) {

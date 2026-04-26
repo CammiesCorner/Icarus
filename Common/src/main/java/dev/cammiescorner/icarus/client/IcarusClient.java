@@ -5,6 +5,7 @@ import com.google.common.base.MoreObjects;
 import dev.cammiescorner.icarus.client.models.*;
 import dev.cammiescorner.icarus.init.IcarusItemTags;
 import dev.cammiescorner.icarus.util.IcarusHelper;
+import dev.cammiescorner.icarus.util.StaminaProvider;
 import dev.upcraft.sparkweave.api.client.event.RegisterLayerDefinitionsEvent;
 import dev.upcraft.sparkweave.api.entrypoint.ClientEntryPoint;
 import dev.upcraft.sparkweave.api.event.EntityTickEvents;
@@ -42,8 +43,10 @@ public class IcarusClient implements ClientEntryPoint {
     }
 
     public static boolean onPlayerTick(AbstractClientPlayer player, Level level) {
-        if (player.isFallFlying() && IcarusHelper.hasWings(player) && player.zza > 0) {
-            var cfg = IcarusHelper.getConfigValues(player);
+        var cfg = IcarusHelper.getConfigValues(player);
+        var canFly = cfg.useStaminaForFlight() ? player instanceof StaminaProvider provider &&  provider.icarus$getStamina() > 0 : player.getFoodData().getFoodLevel() >= cfg.requiredFoodAmount();
+
+        if (player.isFallFlying() && IcarusHelper.hasWings(player) && player.zza > 0 && canFly) {
             var rotation = player.getLookAngle();
             var velocity = player.getDeltaMovement();
 

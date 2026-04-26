@@ -52,6 +52,8 @@ public final class IcarusConfig {
     public static float requiredFoodAmount = 6.001F;
     @ConfigEntry(id = "max_height_enabled", translation = "config.icarus.max_height_enabled")
     public static boolean maxHeightEnabled = true;
+    @ConfigEntry(id = "drop_out_of_sky_when_tired", translation = "config.icarus.drop_out_of_sky_when_tired")
+    public static boolean dropOutOfSkyWhenTired = false;
     @ConfigEntry(id = "use_stamina_for_flight", translation = "config.icarus.use_stamina_for_flight")
     public static boolean useStaminaForFlight = true;
     @ConfigEntry(id = "stamina_amount", translation = "config.icarus.stamina_amount")

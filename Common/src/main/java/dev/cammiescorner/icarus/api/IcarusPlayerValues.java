@@ -25,6 +25,8 @@ public interface IcarusPlayerValues {
 
     boolean maxHeightEnabled();
 
+    boolean dropOutOfSkyWhenTired();
+
     boolean useStaminaForFlight();
 
     float staminaAmount();

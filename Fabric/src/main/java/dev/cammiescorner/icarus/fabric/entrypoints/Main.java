@@ -1,5 +1,6 @@
 package dev.cammiescorner.icarus.fabric.entrypoints;
 
+import dev.cammiescorner.icarus.init.IcarusPotions;
 import dev.cammiescorner.icarus.item.WingItem;
 import dev.cammiescorner.icarus.util.IcarusHelper;
 import dev.emi.trinkets.TrinketSlot;
@@ -10,6 +11,7 @@ import dev.emi.trinkets.api.TrinketsApi;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -19,6 +21,8 @@ public class Main implements ModInitializer {
     @Override
     public void onInitialize() {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> IcarusHelper.onServerPlayerJoin(handler.getPlayer()));
+
+        FabricBrewingRecipeRegistryBuilder.BUILD.register(IcarusPotions::registerPotionRecipes);
 
         IcarusHelper.getEquippedWings = entity -> {
             var component = TrinketsApi.getTrinketComponent(entity);

@@ -5,6 +5,7 @@ import com.teamresourceful.resourcefulconfig.api.loader.Configurator;
 import commonnetwork.api.Network;
 import dev.cammiescorner.icarus.init.IcarusAttributes;
 import dev.cammiescorner.icarus.init.IcarusItems;
+import dev.cammiescorner.icarus.init.IcarusPotions;
 import dev.cammiescorner.icarus.init.IcarusStatusEffects;
 import dev.cammiescorner.icarus.network.c2s.ApplyBoostPacket;
 import dev.cammiescorner.icarus.network.s2c.SyncConfigValuesPacket;
@@ -45,5 +46,6 @@ public class Icarus implements MainEntryPoint {
         IcarusItems.ITEMS.accept(registryService);
         IcarusItems.CREATIVE_TABS.accept(registryService);
         IcarusStatusEffects.STATUS_EFFECTS.accept(registryService);
+        IcarusPotions.POTIONS.accept(registryService);
     }
 }

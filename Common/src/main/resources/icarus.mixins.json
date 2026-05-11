@@ -6,6 +6,7 @@
 	"compatibilityLevel": "JAVA_${java_version}",
 	"mixins": [
 		"EntityMixin",
+		"LivingEntityMixin",
 		"PlayerMixin"
 	],
 	"client": [

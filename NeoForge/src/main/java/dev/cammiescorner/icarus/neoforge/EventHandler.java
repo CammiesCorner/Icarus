@@ -2,12 +2,14 @@ package dev.cammiescorner.icarus.neoforge;
 
 import com.illusivesoulworks.caelus.api.CaelusApi;
 import dev.cammiescorner.icarus.Icarus;
+import dev.cammiescorner.icarus.init.IcarusPotions;
 import dev.cammiescorner.icarus.util.IcarusHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
@@ -38,6 +40,11 @@ public class EventHandler {
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void potionBuilder(RegisterBrewingRecipesEvent event) {
+        IcarusPotions.registerPotionRecipes(event.getBuilder());
     }
 
     @SubscribeEvent

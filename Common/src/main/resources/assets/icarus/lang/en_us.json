@@ -90,6 +90,29 @@
   "item.icarus.discords_wings": "Discord's Wings",
   "item.icarus.zanzas_wings": "Zanza's Wings",
 
+  "item.minecraft.potion.effect.energized": "Potion of Energy",
+  "item.minecraft.potion.effect.energized_long": "Potion of Energy",
+  "item.minecraft.potion.effect.energized_strong": "Potion of Energy",
+  "item.minecraft.splash_potion.effect.energized": "Splash Potion of Energy",
+  "item.minecraft.splash_potion.effect.energized_long": "Splash Potion of Energy",
+  "item.minecraft.splash_potion.effect.energized_strong": "Splash Potion of Energy",
+  "item.minecraft.lingering_potion.effect.energized": "Lingering Potion of Energy",
+  "item.minecraft.lingering_potion.effect.energized_long": "Lingering Potion of Energy",
+  "item.minecraft.lingering_potion.effect.energized_strong": "Lingering Potion of Energy",
+
+  "item.minecraft.potion.effect.second_wind": "Potion of Second Wind",
+  "item.minecraft.potion.effect.second_wind_strong": "Potion of Second Wind",
+  "item.minecraft.splash_potion.effect.second_wind": "Splash Potion of Second Wind",
+  "item.minecraft.splash_potion.effect.second_wind_strong": "Splash Potion of Second Wind",
+  "item.minecraft.lingering_potion.effect.second_wind": "Lingering Potion of Second Wind",
+  "item.minecraft.lingering_potion.effect.second_wind_strong": "Lingering Potion of Second Wind",
+
+  "item.minecraft.tipped_arrow.effect.energized": "Arrow of Energy",
+  "item.minecraft.tipped_arrow.effect.energized_long": "Arrow of Energy",
+  "item.minecraft.tipped_arrow.effect.energized_strong": "Arrow of Energy",
+  "item.minecraft.tipped_arrow.effect.second_wind": "Arrow of Second Wind",
+  "item.minecraft.tipped_arrow.effect.second_wind_strong": "Arrow of Second Wind",
+
   "config.icarus.can_loop_de_loop_server": "Can players do loop-de-loops?",
   "config.icarus.can_loop_de_loop_client": "Can you do loop-de-loops?",
   "config.icarus.armor_slows": "Does armor slow the player down?",
@@ -111,6 +134,8 @@
   "attribute.name.icarus.max_stamina": "Max Flight Stamina",
 
   "effect.icarus.flightless": "Flightless",
+  "effect.icarus.energized": "Energized",
+  "effect.icarus.second_wind": "Second Wind",
 
   "message.icarus.status.no_fly.dimension": "Flying is not allowed in this dimension!",
   "message.icarus.status.no_fly.hunger": "You cannot fly with an empty stomach!",

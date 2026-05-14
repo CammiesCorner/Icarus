@@ -1,6 +1,5 @@
 package dev.cammiescorner.icarus.mixin;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import dev.cammiescorner.icarus.api.SlowFallingEntity;
 import dev.cammiescorner.icarus.init.IcarusAttributes;
 import dev.cammiescorner.icarus.network.s2c.SyncFlightStaminaPacket;
@@ -10,7 +9,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
@@ -47,13 +45,6 @@ public abstract class PlayerMixin extends LivingEntity implements SlowFallingEnt
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
     public void readStamina(CompoundTag compound, CallbackInfo ci) {
         icarus$flightStamina = compound.getFloat("IcarusStamina");
-    }
-
-    @ModifyReturnValue(method = "createAttributes", at = @At("RETURN"))
-    private static AttributeSupplier.Builder createPlayerAttributes(AttributeSupplier.Builder builder) {
-        IcarusAttributes.registerAll();
-
-        return builder.add(IcarusAttributes.MAX_STAMINA.holder());
     }
 
     @Override

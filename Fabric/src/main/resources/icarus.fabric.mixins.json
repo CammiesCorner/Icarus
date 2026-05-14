@@ -5,6 +5,7 @@
   "plugin": "dev.cammiescorner.icarus.IcarusMixinPlugin",
   "compatibilityLevel": "JAVA_${java_version}",
   "mixins": [
+    "PlayerMixin",
     "WingItemMixin"
   ],
   "client": [

@@ -16,23 +16,23 @@ neoforge = "21.1.215"
 
 # Fabric
 # https://fabricmc.net/develop
-fabric_loom = "1.13.4" # https://maven.fabricmc.net/fabric-loom/fabric-loom.gradle.plugin
-fabric_loader = "0.17.3"
-fabric_api = "0.116.7+1.21.1"
+fabric_loom = "1.16.2" # https://maven.fabricmc.net/fabric-loom/fabric-loom.gradle.plugin
+fabric_loader = "0.19.2"
+fabric_api = "0.116.11+1.21.1"
 
 # Minecraft dependencies
-jetbrains_annotations = "26.0.2-1"
+jetbrains_annotations = "26.1.0"
 mixin = "0.15.5+mixin.0.8.7"
-mixin_extras = "0.5.0"
+mixin_extras = "0.5.3"
 asm = "9.8"
 
 # Other dependencies
 autoservice = "1.1.1"
-junit = "6.0.1"
+junit = "6.0.3"
 
 # Mods
 # https://modrinth.com/mod/cardinal-components-api/versions
-cca = "6.1.2"
+cca = "6.1.3"
 # https://modrinth.com/mod/curios/versions
 curios = "9.5.1+1.21.1"
 # https://modrinth.com/mod/caelus/versions
@@ -50,7 +50,7 @@ modmenu = "11.0.3"
 # https://modrinth.com/mod/resourceful-config/versions
 resourcefulconfig = "3.0.11"
 # https://modrinth.com/mod/sparkweave/versions
-sparkweave = "0.508.4"
+sparkweave = "0.510.0"
 # https://modrinth.com/mod/trinkets/versions
 trinkets = "3.10.0"
 

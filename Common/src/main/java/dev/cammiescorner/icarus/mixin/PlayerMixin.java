@@ -69,12 +69,12 @@ public abstract class PlayerMixin extends LivingEntity implements SlowFallingEnt
 
     @Override
     public void icarus$setStamina(float stamina) {
-        stamina = Math.clamp(stamina, 0, icarus$getMaxStamina());
+        var previous = icarus$flightStamina;
 
-        if((Player) (Object) this instanceof ServerPlayer player && icarus$flightStamina != stamina)
+        icarus$flightStamina = Math.clamp(stamina, 0, icarus$getMaxStamina());
+
+        if((Player) (Object) this instanceof ServerPlayer player && previous != icarus$flightStamina)
             SyncFlightStaminaPacket.send(player, stamina);
-
-        icarus$flightStamina = stamina;
     }
 
     @Override

@@ -15,7 +15,7 @@ public class SecondWindStatusEffect extends InstantenousMobEffect {
 	@Override
 	public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
 		if(livingEntity instanceof StaminaProvider provider) {
-			provider.icarus$modifyStamina(provider.icarus$getMaxStamina() * 0.333f * (amplifier + 1));
+			provider.icarus$addStamina(provider.icarus$getMaxStamina() * 0.333f * (amplifier + 1));
 		}
 
 		return true;
@@ -24,7 +24,7 @@ public class SecondWindStatusEffect extends InstantenousMobEffect {
 	@Override
 	public void applyInstantenousEffect(@Nullable Entity source, @Nullable Entity indirectSource, LivingEntity livingEntity, int amplifier, double health) {
 		if(livingEntity instanceof StaminaProvider provider) {
-			provider.icarus$modifyStamina(provider.icarus$getMaxStamina() * 0.333f * (amplifier + 1));
+			provider.icarus$addStamina(provider.icarus$getMaxStamina() * 0.333f * (amplifier + 1));
 		}
 	}
 }

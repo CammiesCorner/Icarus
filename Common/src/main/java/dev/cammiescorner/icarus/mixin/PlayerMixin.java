@@ -34,7 +34,7 @@ public abstract class PlayerMixin extends LivingEntity implements SlowFallingEnt
     @Inject(method = "tick", at = @At("TAIL"))
     private void tickStamina(CallbackInfo ci) {
         if(!level().isClientSide() && onGround() && icarus$getStamina() < icarus$getMaxStamina())
-            icarus$modifyStamina(this.isCreative() ? icarus$getMaxStamina() : IcarusHelper.getConfigValues(this).staminaRegen());
+            icarus$addStamina(this.isCreative() ? icarus$getMaxStamina() : IcarusHelper.getConfigValues(this).staminaRegen());
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
@@ -78,7 +78,7 @@ public abstract class PlayerMixin extends LivingEntity implements SlowFallingEnt
     }
 
     @Override
-    public void icarus$modifyStamina(float amount) {
+    public void icarus$addStamina(float amount) {
         icarus$setStamina(icarus$getStamina() + amount);
     }
 }

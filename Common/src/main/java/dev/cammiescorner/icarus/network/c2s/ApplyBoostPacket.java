@@ -29,7 +29,7 @@ public record ApplyBoostPacket() {
             var cfg = IcarusHelper.getConfigValues(player);
 
             if(cfg.useStaminaForFlight() && player instanceof StaminaProvider provider)
-                provider.icarus$modifyStamina(-cfg.staminaAmount());
+                provider.icarus$addStamina(-cfg.staminaAmount());
             else
                 player.getFoodData().addExhaustion(cfg.exhaustionAmount());
         }

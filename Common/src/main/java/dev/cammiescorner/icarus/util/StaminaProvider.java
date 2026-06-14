@@ -4,5 +4,5 @@ public interface StaminaProvider {
 	float icarus$getMaxStamina();
 	float icarus$getStamina();
 	void icarus$setStamina(float stamina);
-	void icarus$modifyStamina(float amount);
+	void icarus$addStamina(float amount);
 }

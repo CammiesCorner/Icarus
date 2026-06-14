@@ -2,6 +2,7 @@ package dev.cammiescorner.icarus;
 
 import com.teamresourceful.resourcefulconfig.common.config.Configurator;
 import commonnetwork.api.Network;
+import dev.cammiescorner.icarus.network.c2s.ApplyBoostPacket;
 import dev.cammiescorner.icarus.network.s2c.SyncConfigValuesPacket;
 import dev.cammiescorner.icarus.util.IcarusHelper;
 import dev.cammiescorner.icarus.util.ServerPlayerFallbackValues;
@@ -17,6 +18,7 @@ public class Icarus {
         CONFIGURATOR.registerConfig(IcarusConfig.class);
 
         Network.registerPacket(SyncConfigValuesPacket.ID, SyncConfigValuesPacket.class, SyncConfigValuesPacket::encode, SyncConfigValuesPacket::decode, SyncConfigValuesPacket::handle);
+        Network.registerPacket(ApplyBoostPacket.ID, ApplyBoostPacket.class, ApplyBoostPacket::encode, ApplyBoostPacket::decode, ApplyBoostPacket::handle);
     }
 
     public static ResourceLocation id(String path) {

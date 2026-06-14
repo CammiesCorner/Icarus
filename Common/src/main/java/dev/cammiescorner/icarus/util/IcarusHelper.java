@@ -4,7 +4,6 @@ import dev.cammiescorner.icarus.api.IcarusPlayerValues;
 import dev.cammiescorner.icarus.api.SlowFallingEntity;
 import dev.cammiescorner.icarus.client.IcarusClient;
 import dev.cammiescorner.icarus.init.IcarusDimensionTypeTags;
-import dev.cammiescorner.icarus.init.IcarusItemTags;
 import dev.cammiescorner.icarus.init.IcarusStatusEffects;
 import dev.cammiescorner.icarus.item.WingItem;
 import dev.cammiescorner.icarus.network.s2c.SyncConfigValuesPacket;
@@ -82,8 +81,7 @@ public class IcarusHelper {
                 return false;
             }
 
-            if ((wings == null || !wings.is(IcarusItemTags.FREE_FLIGHT)) && entity instanceof Player player && !player.isCreative()) {
-                player.getFoodData().addExhaustion(cfg.exhaustionAmount());
+            if (entity instanceof Player player && !player.isCreative()) {
                 if (player.getFoodData().getFoodLevel() < cfg.requiredFoodAmount()) {
                     stopFlying(player);
                     Component message = Component.translatable("message.icarus.status.no_fly.hunger").withStyle(ChatFormatting.BLUE);

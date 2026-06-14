@@ -16,6 +16,9 @@ public class IcarusStaminaOverlay {
 
 	public static void render(GuiGraphics guiGraphics, DeltaTracker tickDelta, LocalPlayer player) {
 		if(!player.isCreative() && player instanceof StaminaProvider provider && IcarusHelper.hasWings(player)) {
+			var cfg = IcarusHelper.getConfigValues(player);
+			if(!cfg.useStaminaForFlight()) return;
+
 			var client = Minecraft.getInstance();
 			int x = client.getWindow().getGuiScaledWidth() / 2 - 9;
 			int y = client.getWindow().getGuiScaledHeight() - 41;

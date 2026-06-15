@@ -2,7 +2,9 @@ package dev.cammiescorner.icarus.fabric.entrypoints;
 
 import dev.cammiescorner.icarus.init.IcarusPotions;
 import dev.cammiescorner.icarus.item.WingItem;
+import dev.cammiescorner.icarus.network.s2c.SyncFlightStaminaPacket;
 import dev.cammiescorner.icarus.util.IcarusHelper;
+import dev.cammiescorner.icarus.util.StaminaProvider;
 import dev.emi.trinkets.TrinketSlot;
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketComponent;
@@ -10,6 +12,7 @@ import dev.emi.trinkets.api.TrinketInventory;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.registry.FabricBrewingRecipeRegistryBuilder;
 import net.minecraft.world.item.Equipable;
@@ -73,5 +76,10 @@ public class Main implements ModInitializer {
         };
 
         EntityElytraEvents.CUSTOM.register((entity, tickElytra) -> IcarusHelper.onFallFlyingTick(entity, IcarusHelper.getEquippedWings(entity), tickElytra));
+        ServerEntityWorldChangeEvents.AFTER_PLAYER_CHANGE_WORLD.register((player, origin, destination) -> {
+            if(player instanceof StaminaProvider staminaProvider) {
+                SyncFlightStaminaPacket.send(player, staminaProvider.icarus$getStamina());
+            }
+        });
     }
 }

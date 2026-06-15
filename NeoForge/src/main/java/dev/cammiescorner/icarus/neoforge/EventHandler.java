@@ -4,7 +4,9 @@ import com.illusivesoulworks.caelus.api.CaelusApi;
 import dev.cammiescorner.icarus.Icarus;
 import dev.cammiescorner.icarus.init.IcarusAttributes;
 import dev.cammiescorner.icarus.init.IcarusPotions;
+import dev.cammiescorner.icarus.network.s2c.SyncFlightStaminaPacket;
 import dev.cammiescorner.icarus.util.IcarusHelper;
+import dev.cammiescorner.icarus.util.StaminaProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
@@ -58,5 +60,12 @@ public class EventHandler {
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeModificationEvent event) {
         event.add(EntityType.PLAYER, IcarusAttributes.MAX_STAMINA.holder());
+    }
+
+    @SubscribeEvent
+    public static void syncAttributes(PlayerEvent.PlayerChangedDimensionEvent event) {
+        if(event.getEntity() instanceof ServerPlayer serverPlayer && serverPlayer instanceof StaminaProvider staminaProvider) {
+            SyncFlightStaminaPacket.send(serverPlayer, staminaProvider.icarus$getStamina());
+        }
     }
 }

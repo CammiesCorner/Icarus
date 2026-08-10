@@ -9,21 +9,37 @@ import net.minecraft.world.level.dimension.LevelStem;
 
 public interface IcarusPlayerValues {
 
-    float wingsSpeed();
+    default float wingsSpeed() {
+        return IcarusConfig.wingsSpeed;
+    }
 
-    float maxSlowedMultiplier();
+    default float maxSlowedMultiplier() {
+        return IcarusConfig.maxSlowedMultiplier;
+    }
 
-    boolean armorSlows();
+    default boolean armorSlows() {
+        return IcarusConfig.armorSlows;
+    }
 
-    boolean canLoopDeLoop();
+    default boolean canLoopDeLoop() {
+        return IcarusConfig.canLoopDeLoop;
+    }
 
-    boolean canSlowFall();
+    default boolean canSlowFall() {
+        return IcarusConfig.canSlowFall;
+    }
 
-    float exhaustionAmount();
+    default float exhaustionAmount() {
+        return IcarusConfig.exhaustionAmount;
+    }
 
-    int maxHeightAboveWorld();
+    default int maxHeightAboveWorld() {
+        return IcarusConfig.maxHeightAboveWorld;
+    }
 
-    boolean maxHeightEnabled();
+    default boolean maxHeightEnabled() {
+        return IcarusConfig.maxHeightEnabled;
+    }
 
     default boolean dropOutOfSkyWhenTired() {
         return IcarusConfig.dropOutOfSkyWhenTired;
@@ -33,9 +49,13 @@ public interface IcarusPlayerValues {
         return IcarusConfig.useStaminaForFlight;
     }
 
-    float staminaAmount();
+    default float staminaAmount() {
+        return IcarusConfig.staminaAmount;
+    }
 
-    float staminaRegen();
+    default float staminaRegen() {
+        return IcarusConfig.staminaRegen;
+    }
 
     default TagKey<LevelStem> noFlyingAllowedInLevels() {
         return IcarusLevelTags.NO_FLYING_ALLOWED;

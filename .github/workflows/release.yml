@@ -48,7 +48,7 @@ jobs:
         run: ./gradlew publish
       - name: Publish (GitHub Releases)
         id: publish_github
-        uses: Kira-NT/mc-publish@995edadc13559a8b28d0b7e6571229f067ec7659
+        uses: Kira-NT/mc-publish@52307b03863581dec6b652b83e597aec02ebb075 # v3.3.1
         with:
           github-token: ${{ github.token }}
           files: |
@@ -57,7 +57,7 @@ jobs:
       - name: Publish (Forge)
         id: publish_forge
         continue-on-error: true
-        uses: Kira-NT/mc-publish@995edadc13559a8b28d0b7e6571229f067ec7659
+        uses: Kira-NT/mc-publish@52307b03863581dec6b652b83e597aec02ebb075 # v3.3.1
         with:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
@@ -68,7 +68,7 @@ jobs:
       - name: Publish (Fabric)
         id: publish_fabric
         continue-on-error: true
-        uses: Kira-NT/mc-publish@995edadc13559a8b28d0b7e6571229f067ec7659
+        uses: Kira-NT/mc-publish@52307b03863581dec6b652b83e597aec02ebb075 # v3.3.1
         with:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}

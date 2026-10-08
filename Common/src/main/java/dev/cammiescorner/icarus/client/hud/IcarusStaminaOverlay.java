@@ -27,11 +27,15 @@ public class IcarusStaminaOverlay {
 				y -= 8;
 			}
 
-			var staminaRatio = provider.icarus$getStamina() / provider.icarus$getMaxStamina();
-			var targetHeight = Mth.floor(9 * staminaRatio);
+			var maxStamina = provider.icarus$getMaxStamina();
+			if(maxStamina > 0) {
+				var stamina = Mth.clamp(provider.icarus$getStamina(), 0, maxStamina);
+				var staminaRatio = stamina / maxStamina;
+				var targetHeight = Mth.floor(9 * staminaRatio);
 
-			guiGraphics.blit(OVERLAY_TEXTURE, x, y, 0, 0, 18, 11, 18, 22);
-			guiGraphics.blit(OVERLAY_TEXTURE, x, y + 10 - targetHeight, 0, 21 - targetHeight, 18, targetHeight, 18, 22);
+				guiGraphics.blit(OVERLAY_TEXTURE, x, y, 0, 0, 18, 11, 18, 22);
+				guiGraphics.blit(OVERLAY_TEXTURE, x, y + 10 - targetHeight, 0, 21 - targetHeight, 18, targetHeight, 18, 22);
+			}
 		}
 	}
 }

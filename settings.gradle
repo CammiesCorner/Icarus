@@ -13,7 +13,7 @@ pluginManagement {
 }
 
 plugins {
-    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+    id 'dev.lukebemish.jvmfinder-convention' version '0.1.3'
 }
 
 rootProject.name = 'Icarus'

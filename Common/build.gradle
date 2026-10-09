@@ -1,6 +1,6 @@
 plugins {
-	id 'net.neoforged.moddev'
-	id 'net.fabricmc.fabric-loom-companion'
+	id("net.neoforged.moddev")
+	id("net.fabricmc.fabric-loom-companion")
 }
 
 neoForge.neoFormVersion = libs.versions.neoform.get()
@@ -17,7 +17,7 @@ dependencies {
 
 	compileOnly libs.figura
 
-	compileOnly variantOf(libs.emi) { classifier 'api' }
+	compileOnly variantOf(libs.emi) { classifier("api") }
 
 	testImplementation libs.junit.api
 	testRuntimeOnly libs.junit.launcher
@@ -25,8 +25,8 @@ dependencies {
 
 neoForge {
 	parchment {
-		minecraftVersion = libs.versions.parchment.minecraft.get()
-		mappingsVersion = libs.versions.parchment.mappings.get()
+		minecraftVersion = libs.versions.parchment.minecraft
+		mappingsVersion = libs.versions.parchment.mappings
 	}
 }
 

@@ -1,5 +1,5 @@
 plugins {
-    id 'net.neoforged.moddev'
+    id "net.neoforged.moddev"
 }
 
 // need this before dependencies because it configures the plugin and creates additionalRuntimeClasspath configuration
@@ -25,7 +25,7 @@ dependencies {
 //    localRuntime libs.figura.neoforge
 //    localRuntime libs.bundles.figura.runtime
 
-    compileOnly variantOf(libs.emi.neoforge) { classifier 'api' }
+    compileOnly variantOf(libs.emi.neoforge) { classifier("api") }
 
     testImplementation libs.neoforge.testframework
 }
@@ -54,41 +54,26 @@ neoForge {
             // "SCAN": For mods scan.
             // "REGISTRIES": For firing of registry events.
             // "REGISTRYDUMP": For getting the contents of all registries.
-            systemProperty 'forge.logging.markers', 'REGISTRIES'
-            systemProperty 'mixin.debug', 'true'
-            systemProperty 'sparkweave.debug', 'true'
+            systemProperty("forge.logging.markers", "REGISTRIES")
+            systemProperty("mixin.debug", "true")
+            systemProperty("sparkweave.debug", "true")
 
             ideName = "NeoForge ${it.name.capitalize()} (${project.path})" // Unify the run config names with fabric
-            gameDirectory = project.file('run')
-
-            if (rootProject.hasProperty('mc_java_agent_path')) {
-                jvmArgument("-javaagent:${rootProject.mc_java_agent_path}")
-            }
+            gameDirectory = project.file("run")
         }
 
         client {
             client()
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            systemProperty("neoforge.enabledGameTestNamespaces", project.mod_id)
 
-            if (project.hasProperty('mc_uuid')) {
-                programArgument "--uuid=${project.findProperty('mc_uuid')}"
-            }
-
-            if (project.hasProperty('mc_username')) {
-                programArgument "--username=${project.findProperty('mc_username')}"
-            }
+            devLogin = true
         }
 
         server {
             server()
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            systemProperty("neoforge.enabledGameTestNamespaces", project.mod_id)
 
-            programArgument '--nogui'
-        }
-
-        data {
-            data()
-            programArguments.addAll('--mod', 'sparkweave', '--mod', project.mod_id, '--all', '--flat', '--output', file('src/generated/resources').absolutePath, '--existing', file('src/main/resources').absolutePath)
+            programArgument("--nogui")
         }
     }
 
@@ -98,8 +83,6 @@ neoForge {
         testedMod = mods."${mod_id}"
     }
 }
-
-sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 tasks.named("compileJava", JavaCompile) {
     source(project(":${rootProject.name}-Common").sourceSets.main.allJava)

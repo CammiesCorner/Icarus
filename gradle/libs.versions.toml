@@ -20,6 +20,10 @@ fabric_loom = "1.18.3" # https://maven.fabricmc.net/net/fabricmc/fabric-loom-rem
 fabric_loader = "0.19.5"
 fabric_api = "0.116.17+1.21.1"
 
+# DevLogin
+# https://github.com/covers1624/DevLogin
+devlogin = "0.1.0.5"
+
 # Minecraft dependencies
 jetbrains_annotations = "26.1.0"
 
@@ -63,6 +67,9 @@ neoforge_testframework = { module = "net.neoforged:testframework", version.ref =
 # Fabric
 fabric_loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric_loader" }
 fabric_api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric_api" }
+
+# DevLogin
+devlogin = { module = "net.covers1624:DevLogin", version.ref = "devlogin" }
 
 # Minecraft dependencies
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }

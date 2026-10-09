@@ -1,5 +1,19 @@
 plugins {
-    id 'net.fabricmc.fabric-loom-remap'
+    id "net.fabricmc.fabric-loom-remap"
+}
+
+repositories {
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "DevLogin Maven"
+                url = "https://maven.covers1624.net"
+            }
+        }
+        filter {
+            includeModule("net.covers1624", "DevLogin")
+        }
+    }
 }
 
 dependencies {
@@ -8,6 +22,7 @@ dependencies {
         it.officialMojangMappings()
         it.parchment("org.parchmentmc.data:parchment-${libs.versions.parchment.minecraft.get()}:${libs.versions.parchment.mappings.get()}@zip")
     })
+    localRuntime(libs.devlogin)
 
     modImplementation libs.fabric.loader
     modImplementation (libs.fabric.api) {
@@ -52,33 +67,24 @@ loom {
 
     runs {
         configureEach {
-            ideConfigGenerated(true)
-            it.property('mixin.debug', 'true')
-            it.property('sparkweave.debug', 'true')
+            generateRunConfig = true
+            systemProperties.put("mixin.debug", "true")
+            systemProperties.put("sparkweave.debug", "true")
         }
 
         client {
             client()
-            setConfigName("Fabric Client")
-            runDir("run")
+            displayName = "Fabric Client"
+            runDirectory = project.file("run")
 
-            if (rootProject.hasProperty('mc_uuid')) {
-                programArgs("--uuid", rootProject.mc_uuid)
-            }
-
-            if (rootProject.hasProperty('mc_username')) {
-                programArgs("--username", rootProject.mc_username)
-            }
-
-            if (rootProject.hasProperty('mc_java_agent_path')) {
-                vmArg("-javaagent:${rootProject.mc_java_agent_path}")
-            }
+            programArguments.addAll("--launch_target", "net.fabricmc.loader.impl.launch.knot.KnotClient")
+            mainClass = "net.covers1624.devlogin.DevLogin"
         }
 
         server {
             server()
-            setConfigName("Fabric Server")
-            runDir("run/server")
+            displayName = "Fabric Server"
+            runDirectory = project.file("run/server")
         }
     }
 }

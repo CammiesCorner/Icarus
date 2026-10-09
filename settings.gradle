@@ -17,7 +17,11 @@ plugins {
 }
 
 rootProject.name = 'Icarus'
-include 'Common', 'Fabric', 'NeoForge'
+
+['Common', 'Fabric', 'NeoForge'].each {
+    include(it)
+    project(":${it}").name = "${rootProject.name}-${it}"
+}
 
 def ENV = System.getenv()
 

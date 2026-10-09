@@ -23,6 +23,12 @@ println("Building ${project.name} ${version}")
 subprojects {
 	apply plugin: 'java-library'
 	apply plugin: 'maven-publish'
+
+	// FIXME workaround for loom bug
+	// https://github.com/FabricMC/fabric-loom/issues/1640
+	if(name == "${rootProject.name}-Fabric") {
+		apply plugin: 'net.fabricmc.fabric-loom-remap'
+	}
 	project.group = rootProject.group
 	project.version = rootProject.version
 
@@ -129,10 +135,6 @@ subprojects {
 		options.tags = ["reason", "implNote"]
 	}
 
-    base {
-	    archivesName = "${rootProject.name}-${project.name}"
-    }
-
 	jar {
 		from(rootProject.file("LICENSE.md")) {
 			rename "LICENSE.md", "LICENSE_${mod_id}.md"
@@ -141,8 +143,8 @@ subprojects {
 			attributes([
 				'Specification-Title'       : rootProject.name,
 				'Specification-Version'     : project.version,
-				'Implementation-Title'      : "${rootProject.name}-${project.name}",
-                'Maven-Artifact'            : "${maven_group_id}:${rootProject.name}-${project.name}:${project.version}",
+				'Implementation-Title'      : project.name,
+                'Maven-Artifact'            : "${maven_group_id}:${project.name}:${project.version}",
 				'Implementation-Version'    : project.version,
 				'Implementation-Timestamp'  : NOW.format("yyyy-MM-dd'T'HH:mm:ssZ"),
 				'Timestamp'                 : NOW.toInstant().toEpochMilli(),
@@ -192,12 +194,11 @@ subprojects {
 	}
 
     publishing {
-        publications {
-            "mavenJava${project.name}"(MavenPublication) {
-				artifactId = "${rootProject.name}-${project.name}"
+		publications {
+			register("mavenJava", MavenPublication) {
 				from components.java
 			}
-        }
+		}
 
 		repositories {
 			if (ENV.MAVEN_UPLOAD_URL) {

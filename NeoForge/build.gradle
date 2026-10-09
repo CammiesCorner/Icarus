@@ -10,7 +10,7 @@ configurations {
 }
 
 dependencies {
-    compileOnly project(":Common")
+    compileOnly project(":${rootProject.name}-Common")
 
     compileOnly libs.autoservice.annotations
     annotationProcessor libs.autoservice
@@ -42,7 +42,7 @@ neoForge {
 
     mods {
         "${mod_id}" {
-            sourceSet(project(":Common").sourceSets.main)
+            sourceSet(project(":${rootProject.name}-Common").sourceSets.main)
             sourceSet(sourceSets.main)
         }
     }
@@ -102,17 +102,17 @@ neoForge {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 tasks.named("compileJava", JavaCompile) {
-    source(project(":Common").sourceSets.main.allJava)
+    source(project(":${rootProject.name}-Common").sourceSets.main.allJava)
 }
 
 tasks.named("javadoc", Javadoc) {
-    source(project(":Common").sourceSets.main.allJava)
+    source(project(":${rootProject.name}-Common").sourceSets.main.allJava)
 }
 
 tasks.named("sourcesJar", Jar) {
-    from(project(":Common").sourceSets.main.allSource)
+    from(project(":${rootProject.name}-Common").sourceSets.main.allSource)
 }
 
 processResources {
-    from project(":Common").sourceSets.main.resources
+    from project(":${rootProject.name}-Common").sourceSets.main.resources
 }

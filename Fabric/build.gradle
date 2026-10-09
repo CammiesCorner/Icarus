@@ -14,7 +14,7 @@ dependencies {
         exclude group: "net.fabricmc", module: "fabric-loader"
     }
 
-    compileOnly project(":Common")
+    compileOnly project(":${rootProject.name}-Common")
     compileOnly libs.jetbrains.annotations
 
     compileOnly libs.autoservice.annotations
@@ -84,17 +84,17 @@ loom {
 }
 
 tasks.named("compileJava", JavaCompile) {
-    source(project(":Common").sourceSets.main.allJava)
+    source(project(":${rootProject.name}-Common").sourceSets.main.allJava)
 }
 
 tasks.named("javadoc", Javadoc) {
-    source(project(":Common").sourceSets.main.allJava)
+    source(project(":${rootProject.name}-Common").sourceSets.main.allJava)
 }
 
 tasks.named("sourcesJar", Jar) {
-    from(project(":Common").sourceSets.main.allSource)
+    from(project(":${rootProject.name}-Common").sourceSets.main.allSource)
 }
 
 processResources {
-    from project(":Common").sourceSets.main.resources
+    from project(":${rootProject.name}-Common").sourceSets.main.resources
 }

@@ -1,6 +1,7 @@
 plugins {
     id 'idea'
-    id 'maven-publish'
+	alias(libs.plugins.fabric.loom) apply(false)
+	alias(libs.plugins.moddevgradle) apply(false)
 }
 
 def javaVersion = 21
@@ -21,6 +22,7 @@ println("Building ${project.name} ${version}")
 
 subprojects {
 	apply plugin: 'java-library'
+	apply plugin: 'maven-publish'
 	project.group = rootProject.group
 	project.version = rootProject.version
 
@@ -196,20 +198,18 @@ subprojects {
 				from components.java
 			}
         }
-    }
-}
 
-publishing {
-    repositories {
-        if (ENV.MAVEN_UPLOAD_URL) {
-            maven {
-                url = ENV.MAVEN_UPLOAD_URL
-                credentials {
-                    username = ENV.MAVEN_UPLOAD_USERNAME
-                    password = ENV.MAVEN_UPLOAD_PASSWORD
-                }
-            }
-        }
+		repositories {
+			if (ENV.MAVEN_UPLOAD_URL) {
+				maven {
+					url = ENV.MAVEN_UPLOAD_URL
+					credentials {
+						username = ENV.MAVEN_UPLOAD_USERNAME
+						password = ENV.MAVEN_UPLOAD_PASSWORD
+					}
+				}
+			}
+		}
     }
 }
 

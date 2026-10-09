@@ -1,5 +1,5 @@
 plugins {
-    alias libs.plugins.moddevgradle
+    id 'net.neoforged.moddev'
 }
 
 // need this before dependencies because it configures the plugin and creates additionalRuntimeClasspath configuration

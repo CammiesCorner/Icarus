@@ -24,11 +24,6 @@ subprojects {
 	apply plugin: 'java-library'
 	apply plugin: 'maven-publish'
 
-	// FIXME workaround for loom bug
-	// https://github.com/FabricMC/fabric-loom/issues/1640
-	if(name == "${rootProject.name}-Fabric") {
-		apply plugin: 'net.fabricmc.fabric-loom-remap'
-	}
 	project.group = rootProject.group
 	project.version = rootProject.version
 

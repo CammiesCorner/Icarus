@@ -16,7 +16,7 @@ neoforge = "21.1.256"
 
 # Fabric
 # https://fabricmc.net/develop
-fabric_loom = "1.18.3" # https://maven.fabricmc.net/net/fabricmc/fabric-loom-remap/net.fabricmc.fabric-loom-remap.gradle.plugin/
+fabric_loom = "1.18.4" # https://maven.fabricmc.net/net/fabricmc/fabric-loom-remap/net.fabricmc.fabric-loom-remap.gradle.plugin/
 fabric_loader = "0.19.5"
 fabric_api = "0.116.17+1.21.1"
 

@@ -1,7 +1,6 @@
 package dev.cammiescorner.icarus.client;
 
 import com.google.auto.service.AutoService;
-import com.google.common.base.MoreObjects;
 import dev.cammiescorner.icarus.client.models.*;
 import dev.cammiescorner.icarus.init.IcarusItemTags;
 import dev.cammiescorner.icarus.util.IcarusHelper;
@@ -21,10 +20,15 @@ import org.jetbrains.annotations.ApiStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 @AutoService(ClientEntryPoint.class)
 public class IcarusClient implements ClientEntryPoint {
+
+    @ApiStatus.Internal
+    public static Function<LivingEntity, ItemStack> getVisualEquippedWings = IcarusHelper::getEquippedWings;
 
     private static final List<Predicate<LivingEntity>> renderPredicates = new ArrayList<>();
 
@@ -66,7 +70,7 @@ public class IcarusClient implements ClientEntryPoint {
 
     @ApiStatus.Internal
     public static ItemStack getWingsForRendering(LivingEntity entity) {
-        return MoreObjects.firstNonNull(IcarusHelper.getEquippedWings.apply(entity), ItemStack.EMPTY);
+        return Objects.requireNonNullElse(getVisualEquippedWings.apply(entity), ItemStack.EMPTY);
     }
 
     @ApiStatus.Internal

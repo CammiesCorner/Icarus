@@ -10,11 +10,13 @@ import top.theillusivec4.curios.api.CuriosApi;
 @Mod(Icarus.MODID)
 public class Main {
 
+    private static final String CURIOS_CACHE_KEY = Icarus.id("wings").toString();
+
     public Main() {
         IcarusHelper.getEquippedWings = entity -> {
             var component = CuriosApi.getCuriosInventory(entity);
             if (component.isPresent()) {
-                var slot = component.orElseThrow().findFirstCurio(stack -> stack.getItem() instanceof WingItem);
+                var slot = component.orElseThrow().findFirstCurio(stack -> stack.getItem() instanceof WingItem, CURIOS_CACHE_KEY);
                 if (slot.isPresent()) {
                     return slot.orElseThrow().stack();
                 }
@@ -25,7 +27,7 @@ public class Main {
 
         IcarusHelper.hasWings = entity -> {
             var component = CuriosApi.getCuriosInventory(entity);
-            return component.isPresent() && component.orElseThrow().isEquipped(stack -> stack.getItem() instanceof WingItem);
+            return component.flatMap(c -> c.findFirstCurio(stack -> stack.getItem() instanceof WingItem, CURIOS_CACHE_KEY)).isPresent();
         };
     }
 }

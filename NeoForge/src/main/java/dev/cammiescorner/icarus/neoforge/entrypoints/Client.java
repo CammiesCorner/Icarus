@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
@@ -19,7 +20,8 @@ import top.theillusivec4.curios.api.CuriosApi;
 
 @EventBusSubscriber(value = Dist.CLIENT)
 public class Client {
-    public Client() {
+    @SubscribeEvent
+    public static void onModStart(FMLClientSetupEvent event) {
         IcarusAPIClient.addRenderPredicate((entity) -> {
             var inventory = CuriosApi.getCuriosInventory(entity);
             ItemStack stack = IcarusAPIClient.getWingsForRendering(entity);

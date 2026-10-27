@@ -12,12 +12,12 @@ neoform = "1.21.1-20240808.144430"
 
 # NeoForge
 # https://projects.neoforged.net/neoforged/neoforge
-neoforge = "21.1.256"
+neoforge = "21.1.265"
 
 # Fabric
 # https://fabricmc.net/develop
-fabric_loom = "1.18.4" # https://maven.fabricmc.net/net/fabricmc/fabric-loom-remap/net.fabricmc.fabric-loom-remap.gradle.plugin/
-fabric_loader = "0.19.5"
+fabric_loom = "1.19.3" # https://maven.fabricmc.net/net/fabricmc/fabric-loom-remap/net.fabricmc.fabric-loom-remap.gradle.plugin/
+fabric_loader = "0.20.1"
 fabric_api = "0.116.17+1.21.1"
 
 # DevLogin

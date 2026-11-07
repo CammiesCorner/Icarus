@@ -28,7 +28,7 @@ import java.util.function.Predicate;
 public class IcarusClient implements ClientEntryPoint {
 
     @ApiStatus.Internal
-    public static Function<LivingEntity, ItemStack> getVisualEquippedWings = IcarusHelper::getEquippedWings;
+    public static Function<LivingEntity, ItemStack> getVisualEquippedWings = IcarusHelper.getEquippedWings;
 
     private static final List<Predicate<LivingEntity>> renderPredicates = new ArrayList<>();
 
